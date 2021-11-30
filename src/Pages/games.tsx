@@ -5,11 +5,12 @@ import {
   Button,
   ListItem,
   ListItemText,
-  ListSubheader,
+  Typography,
 } from "@material-ui/core";
-import { Game, getGames } from "../Api/gameApi";
+import { Game, get_games } from "../Api/gameApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
+import { games_url } from "../Api/urls";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,6 +27,10 @@ const useStyles = makeStyles((theme: Theme) =>
       marginBottom: "100px",
       minWidth: "500px",
     },
+    listItemStyle: {
+      width: "100%",
+      display: "flex",
+    },
     buttonStyle: {
       backgroundColor: "#ffcdb2",
       marginLeft: "10px",
@@ -35,30 +40,31 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const exampleList: Game[] = [
-  { id: "First game" },
-  { id: "First game cool id" },
-  { id: "Hmmm nice" },
-  { id: "Hmmm nice" },
-  { id: "Hmmm nice" },
-  { id: "Hmmm nice" },
-  { id: "Hmmm nice" },
-];
+// const exampleList: Game[] = [
+//   { id: "First game", name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
+//   { id: "First game cool id" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
+//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
+//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
+//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
+//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
+//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
+// ];
 export function Games() {
   const classes = useStyles();
-  const [gameList, setGameList] = React.useState<Game[]>(exampleList);
+  const [gameList, setGameList] = React.useState<Game[]>([]);
   const [, setSelectedIndex] = React.useState(0);
   const [getGamesTrigger] = React.useState(true);
   const handleListItemClick = (index: number) => {
     setSelectedIndex(index);
   };
   useEffect(() => {
-    getGames().then((r) => {
+    get_games().then((r) => {
       if (r.isError) {
         window.location.href = "/login";
         return;
       }
-      setGameList(r.data?.games || []);
+      setGameList(r.data || []);
+      console.log(gameList);
     });
   }, [getGamesTrigger]);
   return (
@@ -68,7 +74,7 @@ export function Games() {
           {gameList.map((game, index) => {
             return (
               <div key={game.id}>
-                <ListItem onClick={() => handleListItemClick(index)}>
+                <ListItem onClick={() => handleListItemClick(index)} className={classes.listItemStyle}>
                   <img
                     src={logo}
                     alt="logo"
@@ -76,11 +82,16 @@ export function Games() {
                     height="150"
                     className={classes.logoStyle}
                   />
-                  <ListItemText primary={game.id} />
+                  <div style={{flexGrow: 1}}>
+                    <Typography variant="h3">
+                        {game.name}
+                    </Typography>
+                    <ListItemText primary={game.description} />
+                  </div>
                   <Button
                     className={classes.buttonStyle}
                     component={Link}
-                    to={`games/${game.id}`}
+                    to={`/games/${game.id}/rooms`}
                   >
                     JOIN
                   </Button>
