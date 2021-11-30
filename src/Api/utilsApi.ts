@@ -50,11 +50,23 @@ export const handleError = async <T>(error: any): Promise<IApiResponse<T>> => {
   };
 };
 
-export const getRequestConfig = () => {
+export const get_request_config = () => {
   return {
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + sessionStorage.getItem("token"),
+      //"X-CSRFToken": "TSJsRSKracSJqIFnSf45TvBox2vXL9fArMbBCNKSNmMoNVNKc4NVD6Ywp39eGK21"
+      //Authorization: "Bearer " + sessionStorage.getItem("token"),
+    },
+  };
+};
+
+export const get_requested_config_files = () => {
+  return {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "accept": "application/json"
+      //"X-CSRFToken": "TSJsRSKracSJqIFnSf45TvBox2vXL9fArMbBCNKSNmMoNVNKc4NVD6Ywp39eGK21"
+      //Authorization: "Bearer " + sessionStorage.getItem("token"),
     },
   };
 };
