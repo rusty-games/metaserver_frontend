@@ -5,7 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@material-ui/core/TextField";
-import { postGame } from "../Api/gameApi";
+import { post_game } from "../Api/gameApi";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -60,7 +60,8 @@ export function SendGameButton() {
     setDescription(description);
   };
   const sendGame = async () => {
-    postGame();
+    post_game(title, description);
+    setOpenDialog(false);
   };
   return (
     <div>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { AxiosResponse } from "axios";
 import {
   axiosHandleResponse,
-  getRequestConfig,
+  get_request_config,
   IApiResponse,
 } from "./utilsApi";
 
@@ -48,7 +48,7 @@ export const postLogin = async (login: string, password: string) => {
 
 export const postLogout = async () => {
   axios
-    .post(logout_url, {}, getRequestConfig())
+    .post(logout_url, {}, get_request_config())
     .then((r) => {
       axiosHandleResponse(r);
       sessionStorage.clear();
