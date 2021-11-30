@@ -41,7 +41,7 @@ export function TopBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
-          <IconButton edge="start" component={Link} to="/">
+          <IconButton edge="start" component={Link} to="/games">
             <HomeIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

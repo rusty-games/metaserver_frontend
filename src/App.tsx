@@ -3,6 +3,7 @@ import { TopBar } from "./Layout/topbar";
 import "./App.css";
 import { Games } from "./Pages/games";
 import { AdminLoginPage } from "./Pages/login";
+import { RoomPage } from "./Pages/room";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Games />} />
           <Route path="/games" element={<Games />} />
+          <Route path="/games/:id/rooms" element ={<RoomPage/>}/>
           <Route path="/login" element={<AdminLoginPage />} />
         </Routes>
       </div>
