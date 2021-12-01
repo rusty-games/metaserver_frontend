@@ -7,6 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import { post_game } from "../Api/gameApi";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import { styled } from '@mui/material/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,6 +41,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const Input = styled('input')({
+  display: 'none',
+});
+
 export function SendGameButton() {
   const classes = useStyles();
   const [openDialog, setOpenDialog] = React.useState(false);
@@ -47,6 +52,7 @@ export function SendGameButton() {
   const [description, setDescription] = useState<string>(
     "Provide info about your game."
   );
+  const [file, setFile] = useState<any>();
   const openSendGameDialog = () => {
     setOpenDialog(true);
   };
@@ -60,9 +66,12 @@ export function SendGameButton() {
     setDescription(description);
   };
   const sendGame = async () => {
-    post_game(title, description);
+    post_game(title, description, file);
     setOpenDialog(false);
   };
+  const fileChange = (event: any) => {
+    setFile(event?.target.files[0]);
+  }
   return (
     <div>
       <Button
@@ -98,9 +107,12 @@ export function SendGameButton() {
               label="Zip file name"
               className={classes.zipTextFieldStyle}
             />
-            <Button variant="outlined" className={classes.zipButtonStyle}>
-              Send .zip
-            </Button>
+            <label htmlFor="contained-button-file">
+              <Input accept="zip/*" id="contained-button-file" multiple type="file" onChange={fileChange}/>
+              <Button variant="outlined" className={classes.zipButtonStyle} component="span">
+                Send .zip
+              </Button>
+            </label>
           </div>
         </DialogContent>
         <DialogActions>
