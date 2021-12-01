@@ -31,9 +31,10 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
     },
     buttonStyle: {
-      backgroundColor: "#ffcdb2",
+      backgroundColor: "#b5838d",
       marginTop: "10px",
-      color: "#000000",
+      marginBottom: "10px",
+      color: "#FFFFFF",
       fontWeight: "bold",
     },
     
@@ -56,27 +57,21 @@ export function WaitingRoom() {
             ?.groups?.game_id || "";
         console.log(room_id);
         get_room(room_id).then((r) => {
-            if (r.isError) {
-                console.log(r.data)
-              return;
-            }
-            console.log(r.data)
-            setRoom(r.data);
-        });
-        console.log(`cool but ${room}`)
-          get_game(room?.game || "").then((r) => {
+          if (r.isError) {
+              console.log(r.data)
+            return;
+          }
+          setRoom(r.data);
+          get_game(r.data?.game || "").then((r) => {
             if (r.isError) {
                 console.log(r.data)
               return;
             }
             setGame(r.data);
+          });
         });
+        
       }, [getDataTrigger]);
-
-      const getGame = async () => {
-          await new Promise(resolve => setTimeout(resolve, 500));
-          
-      }
 
       return (
         <div className={classes.listStyle}>
@@ -95,7 +90,7 @@ export function WaitingRoom() {
                     <ListItemText primary={game?.description} />
                   </div>
             </div>
-            <Button component={Link} to={`/games/${game?.id}/rooms`}>
+            <Button component={Link} to={`/games/${game?.id}/rooms`} className={classes.buttonStyle}>
                 Return to room list
             </Button>
 
