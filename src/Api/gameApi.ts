@@ -57,7 +57,11 @@ export const get_games_not_accepted = async (): Promise<IApiResponse<Game[]>> =>
 export const get_game = async (id: string): Promise<IApiResponse<Game>> => {
   return axios
     .get(games_url + id + '/', get_request_config())
-    .then((r) => axiosHandleResponse(r));
+    .then((r) => axiosHandleResponse(r))
+    .catch((err) => {
+      handleError(err);
+      return err;
+    });
 }
 
 export const patch_game = async (id: string, name: string, description: string, accepted: boolean): Promise<IApiResponse<Game>> => {
