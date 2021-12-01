@@ -11,6 +11,7 @@ import { Game, get_game } from "../Api/gameApi";
 import { get_rooms_in_game, post_room, Room } from "../Api/roomApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
+import { RoomButton } from "../Layout/createRoomButton";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     logoStyle: {
@@ -49,10 +50,6 @@ export function RoomPage() {
     const handleListItemClick = (index: number) => {
         setSelectedIndex(index);
       };
-    const handleCreateRoom = async (name: string, max_players: number) => {
-        post_room(name,max_players);
-        setDataTrigger(!getDataTrigger);
-    }
     useEffect(() => {
         const url = window.location.href;
         const game_id =
@@ -65,6 +62,13 @@ export function RoomPage() {
           }
           setRoomList(r.data || []);
         });
+      }, [getDataTrigger]);
+
+      useEffect(() => {
+        const url = window.location.href;
+        const game_id =
+          url.match(/.*?\/games\/(?<game_id>[^/]*)\/rooms/)
+            ?.groups?.game_id || "";
         get_game(game_id).then((r) => {
             if (r.isError) {
                 console.log(r.data)
@@ -91,9 +95,7 @@ export function RoomPage() {
                     <ListItemText primary={game?.description} />
                   </div>
             </div>
-            <Button variant="contained" className={classes.buttonStyle} onClick={() => handleCreateRoom("4c4cb68f-0856-4220-8e97-af7549d2d6f3", 10)}>
-                Create Room
-            </Button>
+            <RoomButton/>
             <h2>
                 Rooms:
             </h2>
@@ -104,9 +106,11 @@ export function RoomPage() {
                 return (
                     <div key={room.id}>
                     <ListItem onClick={() => handleListItemClick(index)} className={classes.listItemStyle}>
-                        <ListItemText primary={`${room.id} (Players: ${room.current_players}/${room.max_players})`} />
+                        <ListItemText primary={`${room.name} (Players: ${room.current_players}/${room.max_players})`} />
                         <Button
                         className={classes.buttonStyle}
+                        component={Link}
+                        to={`/rooms/api/rooms/${room.id}`}
                         >
                         JOIN
                         </Button>
