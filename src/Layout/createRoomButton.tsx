@@ -72,12 +72,13 @@ export function RoomButton() {
         onClick={openCreateRoomDialog}
         className={classes.buttonStyle}
       >
-        Create Game
+        Create room
       </Button>
       <Dialog open={openDialog}>
         <DialogTitle>Create new room</DialogTitle>
         <DialogContent className={classes.dialogStyle}>
           <TextField
+            id="create-room-max-players-number-input"
             variant="filled"
             label="Max number of players in room"
             type="number"

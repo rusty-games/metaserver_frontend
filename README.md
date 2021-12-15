@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Tests
+
+### Selenium tests
+
+To run frontend test Selenium plug in for browser is required. Example link for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/selenium-ide/).
+
+Open project file (located in /src/tests folder) in Selenium IDE (Browser plug in). It is possible to run both single test and all tests.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -18,6 +26,7 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
 
 ### `npm run build`
 
