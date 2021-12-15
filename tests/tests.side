@@ -1,0 +1,418 @@
+{
+  "id": "cb048f96-91a8-4710-93c1-567667a25aa9",
+  "version": "2.0",
+  "name": "tests",
+  "url": "http://localhost:3000/games",
+  "tests": [{
+    "id": "b06bab3e-1708-4e78-bad2-e1999d2bafe9",
+    "name": "test_1_Join_chess_game",
+    "commands": [{
+      "id": "36b15089-b216-4293-a58c-3a85f851ad52",
+      "comment": "",
+      "command": "open",
+      "target": "/games",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "41b9678d-74b0-43f6-94e3-7ec76eb900ba",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1858x1096",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "583ced08-d90f-433c-91b5-78bb7cf40970",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=div:nth-child(2) > .MuiListItem-root .MuiButton-label",
+      "targets": [
+        ["css=div:nth-child(2) > .MuiListItem-root .MuiButton-label", "css:finder"],
+        ["xpath=//div[@id='root']/div/ul/li/ul/div[2]/li/a/span", "xpath:idRelative"],
+        ["xpath=//div[2]/li/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "73f99fe1-9853-4ce3-846e-ccfde59f1925",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(2) > .MuiListItem-root .MuiButton-label",
+      "targets": [
+        ["css=div:nth-child(2) > .MuiListItem-root .MuiButton-label", "css:finder"],
+        ["xpath=//div[@id='root']/div/ul/li/ul/div[2]/li/a/span", "xpath:idRelative"],
+        ["xpath=//div[2]/li/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "f704fae0-c928-4cb0-bb8b-a32d7d887fa9",
+    "name": "test_20_Join_chess_room",
+    "commands": [{
+      "id": "fd7467d7-c197-49fa-a333-cd305b81a722",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e96b9cfe-2190-4e11-a164-cf65e23ea3a8",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1858x1096",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "66dad723-5b8b-440c-a3d9-719784201897",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=div:nth-child(2) > .MuiListItem-root > .MuiButtonBase-root",
+      "targets": [
+        ["css=div:nth-child(2) > .MuiListItem-root > .MuiButtonBase-root", "css:finder"],
+        ["xpath=//div[@id='root']/div/ul/li/ul/div[2]/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/games/7c15a421-d1a1-4d9a-b98b-68e2965dcbfe/rooms')]", "xpath:href"],
+        ["xpath=//div[2]/li/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0bdde04a-76f0-4ab7-a1f5-a0fa0fe7a225",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(2) > .MuiListItem-root > .MuiButtonBase-root",
+      "targets": [
+        ["css=div:nth-child(2) > .MuiListItem-root > .MuiButtonBase-root", "css:finder"],
+        ["xpath=//div[@id='root']/div/ul/li/ul/div[2]/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/games/7c15a421-d1a1-4d9a-b98b-68e2965dcbfe/rooms')]", "xpath:href"],
+        ["xpath=//div[2]/li/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d1eefc0f-eabe-4aeb-9c9d-090ea753fe81",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=JOIN",
+      "targets": [
+        ["linkText=JOIN", "linkText"],
+        ["css=div:nth-child(1) > .MuiListItem-root > .MuiButtonBase-root", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/ul/li/ul/div/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/rooms/api/rooms/59706a17-b863-44ad-a4b4-e6ca2853270a')]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'JOIN')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "ad5b25ed-797e-4a42-9da9-654cbf6f6f79",
+    "name": "test_30_Return_home_button",
+    "commands": [{
+      "id": "db6b86a8-3d9f-45be-9a7e-fe8ad056679f",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/games/7c15a421-d1a1-4d9a-b98b-68e2965dcbfe/rooms",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0a66c957-2988-4fb4-af81-cec46aae0480",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1858x1096",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0bb3440f-1f09-4f3b-90eb-d398f20dff45",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=path",
+      "targets": [
+        ["css=path", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "9ae3a1e8-a473-4d7c-a5f4-fee3d97873a3",
+      "comment": "",
+      "command": "click",
+      "target": "css=path",
+      "targets": [
+        ["css=path", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "f8e9c014-c569-4e62-ac64-bf57097b473a",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=path",
+      "targets": [
+        ["css=path", "css:finder"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "cb1a0bb8-68ca-4512-b0d8-f9de0e45142f",
+    "name": "test_40_Return_game_room_list_page",
+    "commands": [{
+      "id": "7ac2a1d1-55a5-45ef-ab62-389de2cca790",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/rooms/api/rooms/59706a17-b863-44ad-a4b4-e6ca2853270a",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "40d35e34-6ec1-4cc3-9076-87aec6cedd26",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1858x1096",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "36f57444-b1d7-4ba8-8f0a-a471f5cb0065",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButton-text > .MuiButton-label",
+      "targets": [
+        ["css=.MuiButton-text > .MuiButton-label", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/a/span", "xpath:idRelative"],
+        ["xpath=//div[2]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d5a57edc-557e-4b7a-a0d3-2bd50f20493f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButton-text > .MuiButton-label",
+      "targets": [
+        ["css=.MuiButton-text > .MuiButton-label", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/a/span", "xpath:idRelative"],
+        ["xpath=//div[2]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1415fdef-fd6b-47bb-a3dc-093b87236d6e",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.makeStyles-buttonStyle-19",
+      "targets": [
+        ["css=.makeStyles-buttonStyle-19", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0783157f-44b4-4799-90f5-554dc6116f03",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.makeStyles-buttonStyle-19",
+      "targets": [
+        ["css=.makeStyles-buttonStyle-19", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "6999110b-ee04-4bc1-9fe2-d69d67cca4b0",
+    "name": "test_50_Create_room",
+    "commands": [{
+      "id": "f560ee1b-a197-40d0-bee5-1cac9fea663c",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/games",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c9887102-8fc1-4213-9003-ee79df34e7ef",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1858x1096",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9868a3cd-710a-4b3c-bd72-af5aae52464a",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=div:nth-child(2) > .MuiListItem-root .MuiButton-label",
+      "targets": [
+        ["css=div:nth-child(2) > .MuiListItem-root .MuiButton-label", "css:finder"],
+        ["xpath=//div[@id='root']/div/ul/li/ul/div[2]/li/a/span", "xpath:idRelative"],
+        ["xpath=//div[2]/li/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0672a9c5-c25f-4f33-8fc5-b34add0b5f9d",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(2) > .MuiListItem-root .MuiButton-label",
+      "targets": [
+        ["css=div:nth-child(2) > .MuiListItem-root .MuiButton-label", "css:finder"],
+        ["xpath=//div[@id='root']/div/ul/li/ul/div[2]/li/a/span", "xpath:idRelative"],
+        ["xpath=//div[2]/li/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "11645b26-dc24-4806-9f70-82c0d6a94a35",
+      "comment": "",
+      "command": "click",
+      "target": "css=.makeStyles-buttonStyle-19 > .MuiButton-label",
+      "targets": [
+        ["css=.makeStyles-buttonStyle-19 > .MuiButton-label", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/div[2]/button/span", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "df26b7d9-2947-4152-8f50-866c9ffedf5a",
+      "comment": "",
+      "command": "click",
+      "target": "id=create-room-max-players-number-input",
+      "targets": [
+        ["id=create-room-max-players-number-input", "id"],
+        ["css=#create-room-max-players-number-input", "css:finder"],
+        ["xpath=//input[@id='create-room-max-players-number-input']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2cc451a2-5df2-419a-83ec-117bfea699d2",
+      "comment": "",
+      "command": "type",
+      "target": "id=create-room-max-players-number-input",
+      "targets": [
+        ["id=create-room-max-players-number-input", "id"],
+        ["css=#create-room-max-players-number-input", "css:finder"],
+        ["xpath=//input[@id='create-room-max-players-number-input']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "2"
+    }, {
+      "id": "2ca16ce3-6ffa-44a8-ab16-ba395cadddc9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiInputBase-inputMultiline",
+      "targets": [
+        ["css=.MuiInputBase-inputMultiline", "css:finder"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3e1504b3-3411-420a-85f3-bcf1de65494b",
+      "comment": "",
+      "command": "type",
+      "target": "css=.MuiInputBase-inputMultiline",
+      "targets": [
+        ["css=.MuiInputBase-inputMultiline", "css:finder"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Another test"
+    }, {
+      "id": "3fe7346d-3621-4c9d-b740-5c0964b86b58",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiDialogContent-root",
+      "targets": [
+        ["css=.MuiDialogContent-root", "css:finder"],
+        ["xpath=//div[3]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1fa30a08-f83b-4824-883e-d4a490898431",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiButton-outlined:nth-child(1)",
+      "targets": [
+        ["css=.MuiButton-outlined:nth-child(1)", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[3]/div/div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'OK')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a51bcec1-e7a5-439f-b7a0-74b7108b61d8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiButton-outlined:nth-child(1)",
+      "targets": [
+        ["css=.MuiButton-outlined:nth-child(1)", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[3]/div/div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'OK')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c440c2c6-4d0f-42ec-8fd6-2ed32fa8b3a7",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "098cd6ff-1112-405c-8845-83767b0c7382",
+      "comment": "",
+      "command": "click",
+      "target": "css=.MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "6a905874-a109-487c-b704-1d7f4ebcb332",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.MuiSvgIcon-root",
+      "targets": [
+        ["css=.MuiSvgIcon-root", "css:finder"]
+      ],
+      "value": ""
+    }, {
+      "id": "f4828d88-c6e4-4581-a420-f135bd22bf2a",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=div:nth-child(2) > .MuiListItem-root .MuiButton-label",
+      "targets": [
+        ["css=div:nth-child(2) > .MuiListItem-root .MuiButton-label", "css:finder"],
+        ["xpath=//div[@id='root']/div/ul/li/ul/div[2]/li/a/span", "xpath:idRelative"],
+        ["xpath=//div[2]/li/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "147931cc-9b2f-4856-8eaf-9f7f21269c36",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(2) > .MuiListItem-root .MuiButton-label",
+      "targets": [
+        ["css=div:nth-child(2) > .MuiListItem-root .MuiButton-label", "css:finder"],
+        ["xpath=//div[@id='root']/div/ul/li/ul/div[2]/li/a/span", "xpath:idRelative"],
+        ["xpath=//div[2]/li/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e7260be3-8a19-486d-bdaa-02095b4dac75",
+      "comment": "",
+      "command": "click",
+      "target": "css=div:nth-child(9) .MuiButton-label",
+      "targets": [
+        ["css=div:nth-child(9) .MuiButton-label", "css:finder"],
+        ["xpath=//div[@id='root']/div/div[2]/ul/li/ul/div[9]/li/a/span", "xpath:idRelative"],
+        ["xpath=//div[9]/li/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3d175c5f-7716-4fd9-aeaf-200d6bc0475d",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "64b765db-c756-4d2f-ac41-7aee5abf66a1",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:3000/", "http://localhost:3000/games"],
+  "plugins": []
+}
