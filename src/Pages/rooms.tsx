@@ -110,7 +110,7 @@ export function RoomPage() {
                         <Button
                         className={classes.buttonStyle}
                         component={Link}
-                        to={`/rooms/api/rooms/${room.id}`}
+                        to={`/rooms/${room.id}`}
                         >
                         JOIN
                         </Button>

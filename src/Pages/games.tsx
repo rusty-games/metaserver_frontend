@@ -64,7 +64,7 @@ export function Games() {
         return;
       }
       setGameList(r.data || []);
-      console.log(gameList);
+      console.log(r.data);
     });
   }, [getGamesTrigger]);
   return (

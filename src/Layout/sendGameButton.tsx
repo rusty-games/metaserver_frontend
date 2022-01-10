@@ -110,14 +110,14 @@ export function SendGameButton() {
             <label htmlFor="contained-button-file">
               <Input accept="zip/*" id="contained-button-file" multiple type="file" onChange={fileChange}/>
               <Button variant="outlined" className={classes.zipButtonStyle} component="span">
-                Send .zip
+                Upload .zip
               </Button>
             </label>
           </div>
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={sendGame}>
-            OK
+            Send
           </Button>
           <Button variant="outlined" onClick={closeSendGameDialog}>
             Cancel

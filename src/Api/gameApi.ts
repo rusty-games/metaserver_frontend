@@ -12,6 +12,7 @@ export interface Game {
   id: string;
   name: string;
   description: string;
+  files: File;
   accepted: boolean;
   created_at: string;
   updated_at: string;
@@ -21,19 +22,22 @@ interface Games {
   games: Game[];
 }
 
-export const post_game = async (name: string, description: string,file:any, accepted?: boolean) => {
+export const post_game = async (name: string, description: string, file: any, accepted?: boolean) => {
   let data = new FormData();
   data.append('name', name);
   data.append('description', description);
-  data.append('gameFile', file, file.name);
-  if(accepted == undefined) axios.post(games_url, data, get_requested_config_files())
-                                 .then((r)=> axiosHandleResponse(r))
-                                 .catch((err) => {handleError(err); return err;});
+  if (accepted == undefined) {
+    data.append('files', file, file.name);
+    console.log(data.get('files'));
+    axios.post(games_url, data, get_requested_config_files())
+      .then((r) => axiosHandleResponse(r))
+      .catch((err) => { handleError(err); return err; });
+  }
   else {
     data.append('accepted', accepted.valueOf.toString());
-    axios.post(games_url, {name: name, description: description, accepted: accepted}, get_requested_config_files())
-            .then((r)=> axiosHandleResponse(r))
-            .catch((err) => {handleError(err); return err;});;
+    axios.post(games_url, data, get_requested_config_files())
+      .then((r) => axiosHandleResponse(r))
+      .catch((err) => { handleError(err); return err; });
   }
 };
 
@@ -67,7 +71,7 @@ export const get_game = async (id: string): Promise<IApiResponse<Game>> => {
 
 export const patch_game = async (id: string, name: string, description: string, accepted: boolean): Promise<IApiResponse<Game>> => {
   return axios
-    .patch(games_url + id, {name: name, description: description, accepted: accepted, id: id},get_request_config())
+    .patch(games_url + id, { name: name, description: description, accepted: accepted, id: id }, get_request_config())
     .then((r) => axiosHandleResponse(r));
 }
 
@@ -75,6 +79,6 @@ export const delete_game = async (id: string): Promise<IApiResponse<Game>> => {
   return axios
     .delete(games_url + id, get_request_config())
     .then((r) => axiosHandleResponse(r))
-    .catch((err) => {handleError(err); return err;});;
+    .catch((err) => { handleError(err); return err; });;
 }
 

@@ -5,7 +5,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@material-ui/core/TextField";
-import { post_game } from "../Api/gameApi";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import { post_room } from "../Api/roomApi";
 
