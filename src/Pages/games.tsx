@@ -40,15 +40,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-// const exampleList: Game[] = [
-//   { id: "First game", name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "First game cool id" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-// ];
 export function Games() {
   const classes = useStyles();
   const [gameList, setGameList] = React.useState<Game[]>([]);

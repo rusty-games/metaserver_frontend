@@ -12,7 +12,7 @@ export interface Game {
   id: string;
   name: string;
   description: string;
-  files: File;
+  files: string;
   accepted: boolean;
   created_at: string;
   updated_at: string;
