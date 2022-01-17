@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "column",
       opacity: "0.95",
       borderRadius: "15px",
-      height: "280px",
+      height: "320px",
       width: "500px",
     },
     textFieldStyle: {
@@ -55,6 +55,7 @@ export function SendGameButton() {
   const [file, setFile] = useState<any>();
   const [fileNameValidator, setFileNameValidator] = useState<Boolean>(true);
   const [helperText, setHelperText] = useState<string>("Title cannot be empty");
+  const [fileExtensionValidation, setFileExtensionValidation] = useState<Boolean>(false);
   const [fileValidation, setFileValidation] = useState<Boolean>(false);
 
   const openSendGameDialog = () => {
@@ -72,7 +73,7 @@ export function SendGameButton() {
     else if(/^[a-zA-z0-9\s]+$/.test(title)) {
       setTitle(title);
       setFileNameValidator(false);
-      if(file?.name) {
+      if(fileExtensionValidation) {
         setFileValidation(true);
       }
     }
@@ -90,7 +91,14 @@ export function SendGameButton() {
     window.location.reload();
   };
   const fileChange = (event: any) => {
-    setFile(event?.target.files[0]);
+    if(!event?.target.files[0].name.includes(".zip")){
+      setFileValidation(false);
+      setFileExtensionValidation(false);
+    }
+    else {
+      setFile(event?.target.files[0]);
+      setFileExtensionValidation(true);
+    }  
   }
   return (
     <div>
@@ -125,10 +133,12 @@ export function SendGameButton() {
           <div>
             <TextField
               fullWidth
-              id="input_zip_name" 
+              id="input_zip_name"
+              helperText= "Olny .zip files are accepted"
+              error={!fileExtensionValidation}
               variant="filled"
               label="Zip file name"
-              defaultValue="game.zip"
+              defaultValue=""
               className={classes.zipTextFieldStyle}
               InputProps={{
                 readOnly: true,
@@ -136,7 +146,7 @@ export function SendGameButton() {
               value={file?.name}
             />
             <label htmlFor="contained-button-file">
-              <Input accept="zip/*" id="contained-button-file" multiple type="file" onChange={fileChange}/>
+              <Input accept=".zip" id="contained-button-file" multiple type="file" onChange={fileChange}/>
               <Button variant="outlined" className={classes.zipButtonStyle} component="span">
                 Upload .zip
               </Button>
