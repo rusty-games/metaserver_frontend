@@ -47,7 +47,7 @@ export function TopBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Rusty Games
           </Typography>
-          <SendGameButton />
+          <SendGameButton/>
           {adminLoggedIn() ? (
             <Button
               variant="contained"

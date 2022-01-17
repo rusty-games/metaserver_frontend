@@ -50,7 +50,7 @@ export const handleError = async <T>(error: any): Promise<IApiResponse<T>> => {
   };
 };
 
-export const get_request_config = () => {
+export const getRequestConfig = () => {
   return {
     headers: {
       "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export const get_request_config = () => {
   };
 };
 
-export const get_requested_config_files = () => {
+export const getRequestedConfigFiles = () => {
   return {
     headers: {
       "Content-Type": "multipart/form-data",

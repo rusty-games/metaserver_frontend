@@ -7,7 +7,7 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import { Game, get_games } from "../Api/gameApi";
+import { Game, getGames } from "../Api/gameApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
 import { games_url } from "../Api/urls";
@@ -40,15 +40,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-// const exampleList: Game[] = [
-//   { id: "First game", name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "First game cool id" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-//   { id: "Hmmm nice" ,name: "first name", description: "I am the best game", accepted: true, created_at: "10-11-2021", updated_at: "10-11-2021" },
-// ];
 export function Games() {
   const classes = useStyles();
   const [gameList, setGameList] = React.useState<Game[]>([]);
@@ -58,13 +49,12 @@ export function Games() {
     setSelectedIndex(index);
   };
   useEffect(() => {
-    get_games().then((r) => {
+    getGames().then((r) => {
       if (r.isError) {
         window.location.href = "/login";
         return;
       }
       setGameList(r.data || []);
-      console.log(gameList);
     });
   }, [getGamesTrigger]);
   return (

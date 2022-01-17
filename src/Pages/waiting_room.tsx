@@ -5,8 +5,8 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import { Game, get_game } from "../Api/gameApi";
-import { get_room, Room } from "../Api/roomApi";
+import { Game, getGame } from "../Api/gameApi";
+import { getRoom, Room } from "../Api/roomApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
 import SelectInput from "@material-ui/core/Select/SelectInput";
@@ -56,13 +56,13 @@ export function WaitingRoom() {
           url.match(/.*?api\/rooms\/(?<game_id>[^/]*)/)
             ?.groups?.game_id || "";
         console.log(room_id);
-        get_room(room_id).then((r) => {
+        getRoom(room_id).then((r) => {
           if (r.isError) {
               console.log(r.data)
             return;
           }
           setRoom(r.data);
-          get_game(r.data?.game || "").then((r) => {
+          getGame(r.data?.game || "").then((r) => {
             if (r.isError) {
                 console.log(r.data)
               return;
