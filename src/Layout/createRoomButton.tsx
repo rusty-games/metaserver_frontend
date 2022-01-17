@@ -63,6 +63,7 @@ export function RoomButton() {
       url.match(/.*?\/games\/(?<game_id>[^/]*)\/rooms/)?.groups?.game_id || "";
     postRoom(game_id, name, max_players);
     setOpenDialog(false);
+    window.location.reload();
   };
   return (
     <div>

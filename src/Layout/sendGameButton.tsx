@@ -69,7 +69,7 @@ export function SendGameButton() {
       setFileNameValidator(true);
       setHelperText("Title cannot be empty");
     }
-    else if(/^[a-zA-z0-9]+$/.test(title)) {
+    else if(/^[a-zA-z0-9\s]+$/.test(title)) {
       setTitle(title);
       setFileNameValidator(false);
       if(file?.name) {
@@ -87,6 +87,7 @@ export function SendGameButton() {
   const sendGame = async () => {
     postGame(title, description, file);
     setOpenDialog(false);
+    window.location.reload();
   };
   const fileChange = (event: any) => {
     setFile(event?.target.files[0]);
