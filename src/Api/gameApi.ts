@@ -1,8 +1,8 @@
 import axios from "axios";
 import {
   axiosHandleResponse,
-  get_requested_config_files,
-  get_request_config,
+  getRequestedConfigFiles,
+  getRequestConfig,
   handleError,
   IApiResponse,
 } from "./utilsApi";
@@ -22,46 +22,41 @@ interface Games {
   games: Game[];
 }
 
-export const post_game = async (name: string, description: string, file: any, accepted?: boolean) => {
+export const postGame = async (name: string, description: string, file: any, accepted?: boolean) => {
   let data = new FormData();
   data.append('name', name);
   data.append('description', description);
   if (accepted == undefined) {
     data.append('files', file, file.name);
-    console.log(data.get('files'));
-    axios.post(games_url, data, get_requested_config_files())
-      .then((r) => axiosHandleResponse(r))
-      .catch((err) => { handleError(err); return err; });
-  }
-  else {
+  } else {
     data.append('accepted', accepted.valueOf.toString());
-    axios.post(games_url, data, get_requested_config_files())
-      .then((r) => axiosHandleResponse(r))
-      .catch((err) => { handleError(err); return err; });
   }
+  axios.post(games_url, data, getRequestedConfigFiles())
+    .then((r) => axiosHandleResponse(r))
+    .catch((err) => { handleError(err); return err; });
 };
 
-export const get_games = async (): Promise<IApiResponse<Game[]>> => {
+export const getGames = async (): Promise<IApiResponse<Game[]>> => {
   return axios
-    .get(games_url, get_request_config())
+    .get(games_url, getRequestConfig())
     .then((r) => axiosHandleResponse(r));
 };
 
-export const get_games_accepted = async (): Promise<IApiResponse<Game[]>> => {
+export const getGamesAccepted = async (): Promise<IApiResponse<Game[]>> => {
   return axios
-    .get(games_accepted_url, get_request_config())
+    .get(games_accepted_url, getRequestConfig())
     .then((r) => axiosHandleResponse(r));
 };
 
-export const get_games_not_accepted = async (): Promise<IApiResponse<Game[]>> => {
+export const getGamesNotAccepted = async (): Promise<IApiResponse<Game[]>> => {
   return axios
-    .get(games_not_accepted_url, get_request_config())
+    .get(games_not_accepted_url, getRequestConfig())
     .then((r) => axiosHandleResponse(r));
 };
 
-export const get_game = async (id: string): Promise<IApiResponse<Game>> => {
+export const getGame = async (id: string): Promise<IApiResponse<Game>> => {
   return axios
-    .get(games_url + id + '/', get_request_config())
+    .get(games_url + id + '/', getRequestConfig())
     .then((r) => axiosHandleResponse(r))
     .catch((err) => {
       handleError(err);
@@ -69,15 +64,15 @@ export const get_game = async (id: string): Promise<IApiResponse<Game>> => {
     });
 }
 
-export const patch_game = async (id: string, name: string, description: string, accepted: boolean): Promise<IApiResponse<Game>> => {
+export const patchGame = async (id: string, name: string, description: string, accepted: boolean): Promise<IApiResponse<Game>> => {
   return axios
-    .patch(games_url + id, { name: name, description: description, accepted: accepted, id: id }, get_request_config())
+    .patch(games_url + id, { name: name, description: description, accepted: accepted, id: id }, getRequestConfig())
     .then((r) => axiosHandleResponse(r));
 }
 
-export const delete_game = async (id: string): Promise<IApiResponse<Game>> => {
+export const deleteGame = async (id: string): Promise<IApiResponse<Game>> => {
   return axios
-    .delete(games_url + id, get_request_config())
+    .delete(games_url + id, getRequestConfig())
     .then((r) => axiosHandleResponse(r))
     .catch((err) => { handleError(err); return err; });;
 }

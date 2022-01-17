@@ -7,7 +7,7 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import { Game, get_games } from "../Api/gameApi";
+import { Game, getGames } from "../Api/gameApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
 import { games_url } from "../Api/urls";
@@ -49,13 +49,12 @@ export function Games() {
     setSelectedIndex(index);
   };
   useEffect(() => {
-    get_games().then((r) => {
+    getGames().then((r) => {
       if (r.isError) {
         window.location.href = "/login";
         return;
       }
       setGameList(r.data || []);
-      console.log(r.data);
     });
   }, [getGamesTrigger]);
   return (

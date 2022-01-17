@@ -5,7 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@material-ui/core/TextField";
-import { post_game } from "../Api/gameApi";
+import { postGame } from "../Api/gameApi";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import { styled } from '@mui/material/styles';
 
@@ -66,7 +66,7 @@ export function SendGameButton() {
     setDescription(description);
   };
   const sendGame = async () => {
-    post_game(title, description, file);
+    postGame(title, description, file);
     setOpenDialog(false);
   };
   const fileChange = (event: any) => {

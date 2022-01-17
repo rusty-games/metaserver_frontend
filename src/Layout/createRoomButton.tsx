@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
-import { post_room } from "../Api/roomApi";
+import { postRoom } from "../Api/roomApi";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,7 +61,7 @@ export function RoomButton() {
     const url = window.location.href;
     const game_id =
       url.match(/.*?\/games\/(?<game_id>[^/]*)\/rooms/)?.groups?.game_id || "";
-    post_room(game_id, name, max_players);
+    postRoom(game_id, name, max_players);
     setOpenDialog(false);
   };
   return (

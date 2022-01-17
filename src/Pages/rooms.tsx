@@ -7,8 +7,8 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import { Game, get_game } from "../Api/gameApi";
-import { get_rooms_in_game, post_room, Room } from "../Api/roomApi";
+import { Game, getGame as getGame } from "../Api/gameApi";
+import { getRoomsInGame as getRoomsInGame, Room } from "../Api/roomApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
 import { RoomButton } from "../Layout/createRoomButton";
@@ -53,16 +53,16 @@ export function RoomPage() {
     if (game == undefined) {
       return;
     }
-    let game_url = game.files;
-    window.open(game_url);
+    let gameUrl = game.files;
+    window.open(gameUrl);
   };
 
   useEffect(() => {
     const url = window.location.href;
-    const game_id =
-      url.match(/.*?\/games\/(?<game_id>[^/]*)\/rooms/)
-        ?.groups?.game_id || "";
-    get_rooms_in_game(game_id).then((r) => {
+    const gameId =
+      url.match(/.*?\/games\/(?<gameId>[^/]*)\/rooms/)
+        ?.groups?.gameId || "";
+    getRoomsInGame(gameId).then((r) => {
       if (r.isError) {
         console.log(r.data)
         return;
@@ -73,10 +73,10 @@ export function RoomPage() {
 
   useEffect(() => {
     const url = window.location.href;
-    const game_id =
-      url.match(/.*?\/games\/(?<game_id>[^/]*)\/rooms/)
-        ?.groups?.game_id || "";
-    get_game(game_id).then((r) => {
+    const gameId =
+      url.match(/.*?\/games\/(?<gameId>[^/]*)\/rooms/)
+        ?.groups?.gameId || "";
+    getGame(gameId).then((r) => {
       if (r.isError) {
         console.log(r.data)
         return;
