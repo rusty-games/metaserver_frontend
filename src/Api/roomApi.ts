@@ -6,7 +6,6 @@ import {
   IApiResponse,
 } from "./utilsApi";
 import { games_url, rooms_url } from "./urls";
-import { Game } from "./gameApi";
 
 export interface Room {
   id: string;
@@ -16,9 +15,9 @@ export interface Room {
   current_players: number;
 }
 
-interface Rooms {
-  games: Room[];
-}
+// interface Rooms {
+//   games: Room[];
+// }
 
 export const get_rooms_in_game = async (id: string): Promise<IApiResponse<Room[]>> => {
   return axios

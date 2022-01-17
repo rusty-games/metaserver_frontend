@@ -10,7 +10,6 @@ import {
 import { Game, get_games } from "../Api/gameApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
-import { games_url } from "../Api/urls";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,7 +63,6 @@ export function Games() {
         return;
       }
       setGameList(r.data || []);
-      console.log(gameList);
     });
   }, [getGamesTrigger]);
   return (

@@ -17,16 +17,16 @@ export interface Game {
   updated_at: string;
 }
 
-interface Games {
-  games: Game[];
-}
+// interface Games {
+//   games: Game[];
+// }
 
 export const post_game = async (name: string, description: string,file:any, accepted?: boolean) => {
   let data = new FormData();
   data.append('name', name);
   data.append('description', description);
   data.append('gameFile', file, file.name);
-  if(accepted == undefined) axios.post(games_url, data, get_requested_config_files())
+  if(accepted === undefined) axios.post(games_url, data, get_requested_config_files())
                                  .then((r)=> axiosHandleResponse(r))
                                  .catch((err) => {handleError(err); return err;});
   else {

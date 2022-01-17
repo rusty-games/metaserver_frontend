@@ -1,4 +1,4 @@
-const BASE_URL = "http://127.0.0.1:8080";
+const BASE_URL = "http://127.0.0.1:8000";
 
 export const games_url = BASE_URL + "/games/api/games/";
 export const games_accepted_url = BASE_URL + "/games/api/games/accepted/";

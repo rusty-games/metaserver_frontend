@@ -8,10 +8,11 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Game, get_game } from "../Api/gameApi";
-import { get_rooms_in_game, post_room, Room } from "../Api/roomApi";
+import { get_rooms_in_game, Room } from "../Api/roomApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
 import { RoomButton } from "../Layout/createRoomButton";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     logoStyle: {
