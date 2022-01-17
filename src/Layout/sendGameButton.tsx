@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     zipTextFieldStyle: {
       marginTop: "10px",
-      width: "388px",
+      width: "350px",
     },
     buttonStyle: {
       backgroundColor: "#b5838d",
@@ -102,10 +102,16 @@ export function SendGameButton() {
           />
           <div>
             <TextField
-              disabled
+              fullWidth
+              id="input_zip_name" 
               variant="filled"
               label="Zip file name"
+              defaultValue="game.zip"
               className={classes.zipTextFieldStyle}
+              InputProps={{
+                readOnly: true,
+              }}
+              value={file?.name}
             />
             <label htmlFor="contained-button-file">
               <Input accept="zip/*" id="contained-button-file" multiple type="file" onChange={fileChange}/>
