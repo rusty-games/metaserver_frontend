@@ -53,6 +53,10 @@ export function SendGameButton() {
     "Provide info about your game."
   );
   const [file, setFile] = useState<any>();
+  const [fileNameValidator, setFileNameValidator] = useState<Boolean>(true);
+  const [helperText, setHelperText] = useState<string>("Title cannot be empty");
+  const [fileValidation, setFileValidation] = useState<Boolean>(false);
+
   const openSendGameDialog = () => {
     setOpenDialog(true);
   };
@@ -60,7 +64,22 @@ export function SendGameButton() {
     setOpenDialog(false);
   };
   const handleChangeTitle = (title: string) => {
-    setTitle(title);
+    setFileValidation(false);
+    if(title == "") {
+      setFileNameValidator(true);
+      setHelperText("Title cannot be empty");
+    }
+    else if(/^[a-zA-z0-9]+$/.test(title)) {
+      setTitle(title);
+      setFileNameValidator(false);
+      if(file?.name) {
+        setFileValidation(true);
+      }
+    }
+    else {
+      setFileNameValidator(true);
+      setHelperText("Numbers and english letters are only allowed");
+    }
   };
   const handleChangeDescription = (description: string) => {
     setDescription(description);
@@ -85,6 +104,8 @@ export function SendGameButton() {
         <DialogTitle>Send new game</DialogTitle>
         <DialogContent className={classes.dialogStyle}>
           <TextField
+            error={!!fileNameValidator}
+            helperText={helperText}
             variant="filled"
             label="Game Name"
             onChange={(event: any) => handleChangeTitle(event.target.value)}
@@ -122,8 +143,8 @@ export function SendGameButton() {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" onClick={sendGame}>
-            Send
+          <Button variant="outlined" onClick={sendGame} disabled={!fileValidation}>
+            Send 
           </Button>
           <Button variant="outlined" onClick={closeSendGameDialog}>
             Cancel
