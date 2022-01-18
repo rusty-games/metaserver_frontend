@@ -118,6 +118,7 @@ export function RoomPage() {
                   <ListItem onClick={() => handleListItemClick(index)} className={classes.listItemStyle}>
                     <ListItemText primary={`${room.name} (Players: ${room.current_players}/${room.max_players})`} />
                     <Button
+                      disabled={room.current_players==room.max_players}
                       className={classes.buttonStyle}
                       component={Link}
                       to={`/rooms/${room.id}`}
