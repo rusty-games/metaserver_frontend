@@ -11,6 +11,7 @@ import { getRoom, Room } from "../Api/roomApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
 import SelectInput from "@material-ui/core/Select/SelectInput";
+import { websocket_channel_url } from "../Api/urls";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,7 +48,8 @@ export function WaitingRoom() {
     const [game, setGame] = React.useState<Game>();
     const [room, setRoom] = React.useState<Room>();
     const [users, setUsers] = React.useState<string[]>([]);
-
+    let players_coutnt = 0;
+    
     useEffect(() => {
         const url = window.location.href;
         const room_id =
@@ -69,7 +71,7 @@ export function WaitingRoom() {
             });
           });
         
-        let chatSocket = new WebSocket('ws://127.0.0.1:8080/ws/room/'+ room_id + '/');
+        let chatSocket = new WebSocket(websocket_channel_url + room_id + '/');
       
         chatSocket.onmessage = function (event) {
           const json = JSON.parse(event.data);
@@ -77,12 +79,18 @@ export function WaitingRoom() {
           try {
             if((json.payload.event === "NEW_PLAYER")) {
               console.log("New player")
+              players_coutnt += 1;
               setUsers(users => [...users, json.payload.data.name]);
             }
             else if((json.payload.event === "START_GAME")) {
               getRoom(room_id).then((r) => {
-                getGame(r.data?.game || "").then((r) => {
-                  window.open(r.data?.files);
+                getGame(r.data?.game || "").then((r_g) => {
+                  if (r.data?.max_players == players_coutnt ) {
+                    window.open(`${r_g.data?.files}?session_id=${json.payload.data.session_id}&is_host=true`);
+                  }
+                  else {
+                    window.open(`${r_g.data?.files}?session_id=${json.payload.data.session_id}&is_host=false`);
+                  }                 
                 });
               });
               
