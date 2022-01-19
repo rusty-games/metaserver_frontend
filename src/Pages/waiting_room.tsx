@@ -46,57 +46,54 @@ export function WaitingRoom() {
     const classes = useStyles();
     const [game, setGame] = React.useState<Game>();
     const [room, setRoom] = React.useState<Room>();
-    const [getDataTrigger, setDataTrigger] = React.useState(true);
-    const [, setSelectedIndex] = React.useState(0);
     const [users, setUsers] = React.useState<string[]>([]);
-    const handleListItemClick = (index: number) => {
-        setSelectedIndex(index);
-      };
+
     useEffect(() => {
         const url = window.location.href;
         const room_id =
           url.match(/.*?\/rooms\/(?<game_id>[^/]*)/)
             ?.groups?.game_id || "";
 
+        getRoom(room_id).then((r) => {
+            if (r.isError) {
+                console.log(r.data)
+              return;
+            }
+            setRoom(r.data);
+            getGame(r.data?.game || "").then((r) => {
+              if (r.isError) {
+                  console.log(r.data)
+                return;
+              }
+              setGame(r.data);
+            });
+          });
+        
         let chatSocket = new WebSocket('ws://127.0.0.1:8080/ws/room/'+ room_id + '/');
       
         chatSocket.onmessage = function (event) {
           const json = JSON.parse(event.data);
-          console.log(`[message] Data received from server: ${json}`);
+          console.log(`[message] Data received from server: ${JSON.stringify(json)}`);
           try {
-            if((json.event = "NEW_PLAYER")) {
-              let new_users = users;
-              new_users.push(json.data)
-              setUsers(new_users);
+            if((json.payload.event === "NEW_PLAYER")) {
+              console.log("New player")
+              setUsers(users => [...users, json.payload.data.name]);
             }
-            else {
-              console.log(users);
-              let new_users = users;
-              new_users.push(json.data)
-              setUsers(new_users);
+            else if((json.payload.event === "START_GAME")) {
+              getRoom(room_id).then((r) => {
+                getGame(r.data?.game || "").then((r) => {
+                  window.open(r.data?.files);
+                });
+              });
+              
             }
           }
           catch (err) {
             console.log(`Error occured: ${err}`);
           }
         };
-
-        getRoom(room_id).then((r) => {
-          if (r.isError) {
-              console.log(r.data)
-            return;
-          }
-          setRoom(r.data);
-          getGame(r.data?.game || "").then((r) => {
-            if (r.isError) {
-                console.log(r.data)
-              return;
-            }
-            setGame(r.data);
-          });
-        });
-        
-      }, []);
+        return () => chatSocket.close();
+      },[]);
 
       return (
         <div className={classes.listStyle}>
@@ -127,10 +124,7 @@ export function WaitingRoom() {
                     Max Players: {room?.max_players}
                 </Typography>
                 <Typography>
-                    Players: {room?.current_players}
-                </Typography>
-                <Typography>
-                    Players Websocket: {users.length}
+                    Players:
                 </Typography>
                 <List>
                   <li>
@@ -138,7 +132,7 @@ export function WaitingRoom() {
                       {users.map((user, index) => {
                       return (
                           <div key={index}>
-                            Hello there {user}
+                            {user}
                           </div>
                       );
                       })}
