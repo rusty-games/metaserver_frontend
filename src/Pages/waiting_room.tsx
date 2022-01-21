@@ -10,8 +10,12 @@ import { Game, getGame } from "../Api/gameApi";
 import { getRoom, Room } from "../Api/roomApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
-import SelectInput from "@material-ui/core/Select/SelectInput";
 import { websocket_channel_url } from "../Api/urls";
+import Alert from '@mui/material/Alert';
+import Collapse from '@mui/material/Collapse';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,12 +23,20 @@ const useStyles = makeStyles((theme: Theme) =>
       border: "solid 2px #6d6875",
       marginRight: "20px",
     },
-    listStyle: {
+    gameInfoStyle: {
       overflowY: "auto",
       opacity: "0.92",
       marginLeft: "25%",
       marginRight: "25%",
       marginTop: "100px",
+      marginBottom: "100px",
+      minWidth: "500px",
+    },
+    listStyle: {
+      overflowY: "auto",
+      opacity: "0.92",
+      marginLeft: "25%",
+      marginRight: "25%",
       marginBottom: "100px",
       minWidth: "500px",
     },
@@ -48,6 +60,7 @@ export function WaitingRoom() {
     const [game, setGame] = React.useState<Game>();
     const [room, setRoom] = React.useState<Room>();
     const [users, setUsers] = React.useState<string[]>([]);
+    const [openAlert, setOpenAlert] = React.useState(true);
     let players_coutnt = 0;
     
     useEffect(() => {
@@ -78,6 +91,7 @@ export function WaitingRoom() {
           console.log(`[message] Data received from server: ${JSON.stringify(json)}`);
           try {
             if((json.payload.event === "NEW_PLAYER")) {
+              setOpenAlert(true);
               console.log("New player")
               players_coutnt += 1;
               setUsers(users => [...users, json.payload.data.name]);
@@ -104,7 +118,7 @@ export function WaitingRoom() {
       },[]);
 
       return (
-        <div className={classes.listStyle}>
+        <div className={classes.gameInfoStyle}>
             <div className={classes.listItemStyle}>
                 <img
                     src={logo}
@@ -123,10 +137,30 @@ export function WaitingRoom() {
             <Button component={Link} to={`/games/${game?.id}/rooms`} className={classes.buttonStyle}>
                 Return to room list
             </Button>
-
+            <Box sx={{ width: '100%' }}>
+              <Collapse in={openAlert}>
+                <Alert
+                  action={
+                    <IconButton
+                      aria-label="close"
+                      color="inherit"
+                      size="small"
+                      onClick={() => {
+                        setOpenAlert(false);
+                      }}
+                    >
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                  sx={{ mb: 2 }}
+                >
+                  New player joined the room!
+                </Alert>
+              </Collapse>
+            </Box>
             <div className={classes.listStyle}>
-                <Typography>
-                    {room?.name}
+                <Typography variant="h5">
+                    Room name: {room?.name}
                 </Typography>
                 <Typography>
                     Max Players: {room?.max_players}
@@ -147,8 +181,7 @@ export function WaitingRoom() {
                   </ul>
                   </li>
                 </List>
-            </div>
-            
+            </div>            
         </div>
       )
 }

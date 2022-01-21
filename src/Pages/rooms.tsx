@@ -33,6 +33,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     buttonStyle: {
       backgroundColor: "#ffcdb2",
+      width: "150px",
+      marginTop: "10px",
+      marginRight: "10px",
+      marginBottom: "10px",
+      color: "#000000",
+      fontWeight: "bold",
+    },
+    buttonStyleJoin: {
+      backgroundColor: "#ffcdb2",
       marginTop: "10px",
       color: "#000000",
       fontWeight: "bold",
@@ -102,10 +111,12 @@ export function RoomPage() {
           <ListItemText primary={game?.description} />
         </div>
       </div>
-      <Button className={classes.buttonStyle} onClick={openGameInNewPage}>
-        Play Solo
-      </Button>
-      <RoomButton />
+      <div className={classes.listItemStyle}>
+        <Button className={classes.buttonStyle} onClick={openGameInNewPage}>
+          Play Solo
+        </Button>
+        <RoomButton />
+      </div>
       <h2>
         Rooms:
       </h2>
@@ -119,7 +130,7 @@ export function RoomPage() {
                     <ListItemText primary={`${room.name} (Players: ${room.current_players}/${room.max_players})`} />
                     <Button
                       disabled={room.current_players==room.max_players}
-                      className={classes.buttonStyle}
+                      className={classes.buttonStyleJoin}
                       component={Link}
                       to={`/rooms/${room.id}`}
                     >

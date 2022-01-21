@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
     buttonStyle: {
       backgroundColor: "#b5838d",
       marginLeft: "10px",
+      marginRight: "20px",
       color: "#FFFFFF",
       fontWeight: "bold",
     },

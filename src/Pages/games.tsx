@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       minWidth: "500px",
     },
     listItemStyle: {
+      height: "160px",
       width: "100%",
       display: "flex",
     },
@@ -76,7 +77,7 @@ export function Games() {
                     <Typography variant="h3">
                         {game.name}
                     </Typography>
-                    <ListItemText primary={game.description} />
+                    <ListItemText primary={game.description} style={{overflowY: 'auto', height: '100px'}}/>
                   </div>
                   <Button
                     className={classes.buttonStyle}

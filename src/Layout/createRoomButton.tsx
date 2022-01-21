@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     buttonStyle: {
       backgroundColor: "#b5838d",
-      marginLeft: "10px",
+      width: "150px",
       marginTop: "10px",
       marginBottom: "10px",
       color: "#FFFFFF",
@@ -97,10 +97,10 @@ export function RoomButton() {
           />
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" onClick={createRoom}>
+          <Button variant="contained" onClick={createRoom}>
             OK
           </Button>
-          <Button variant="outlined" onClick={closeCreateRoomialog}>
+          <Button variant="contained" onClick={closeCreateRoomialog}>
             Cancel
           </Button>
         </DialogActions>

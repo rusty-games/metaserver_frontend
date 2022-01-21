@@ -53,7 +53,7 @@ export function SendGameButton() {
     "Provide info about your game."
   );
   const [file, setFile] = useState<any>();
-  const [fileNameValidator, setFileNameValidator] = useState<Boolean>(true);
+  const [fileNameValidator, setFileNameValidator] = useState<Boolean>(false);
   const [helperText, setHelperText] = useState<string>("Title cannot be empty");
   const [fileExtensionValidation, setFileExtensionValidation] = useState<Boolean>(false);
   const [fileValidation, setFileValidation] = useState<Boolean>(false);
@@ -67,18 +67,19 @@ export function SendGameButton() {
   const handleChangeTitle = (title: string) => {
     setFileValidation(false);
     if(title == "") {
-      setFileNameValidator(true);
+      setFileNameValidator(false);
       setHelperText("Title cannot be empty");
     }
     else if(/^[a-zA-z0-9\s]+$/.test(title)) {
       setTitle(title);
-      setFileNameValidator(false);
+      setFileNameValidator(true);
+      setHelperText("Numbers and english letters are only allowed");
       if(fileExtensionValidation) {
         setFileValidation(true);
       }
     }
     else {
-      setFileNameValidator(true);
+      setFileNameValidator(false);
       setHelperText("Numbers and english letters are only allowed");
     }
   };
@@ -98,6 +99,7 @@ export function SendGameButton() {
     else {
       setFile(event?.target.files[0]);
       setFileExtensionValidation(true);
+      if(fileNameValidator) setFileValidation(true);
     }  
   }
   return (
@@ -113,7 +115,7 @@ export function SendGameButton() {
         <DialogTitle>Send new game</DialogTitle>
         <DialogContent className={classes.dialogStyle}>
           <TextField
-            error={!!fileNameValidator}
+            error={!fileNameValidator}
             helperText={helperText}
             variant="filled"
             label="Game Name"
@@ -134,11 +136,9 @@ export function SendGameButton() {
             <TextField
               fullWidth
               id="input_zip_name"
-              helperText= "Olny .zip files are accepted"
+              helperText= "Only .zip files are accepted"
               error={!fileExtensionValidation}
               variant="filled"
-              label="Zip file name"
-              defaultValue=""
               className={classes.zipTextFieldStyle}
               InputProps={{
                 readOnly: true,
@@ -147,17 +147,17 @@ export function SendGameButton() {
             />
             <label htmlFor="contained-button-file">
               <Input accept=".zip" id="contained-button-file" multiple type="file" onChange={fileChange}/>
-              <Button variant="outlined" className={classes.zipButtonStyle} component="span">
+              <Button variant="contained" className={classes.zipButtonStyle} component="span">
                 Upload .zip
               </Button>
             </label>
           </div>
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" onClick={sendGame} disabled={!fileValidation}>
+          <Button variant="contained" onClick={sendGame} disabled={!fileValidation}>
             Send 
           </Button>
-          <Button variant="outlined" onClick={closeSendGameDialog}>
+          <Button variant="contained" onClick={closeSendGameDialog}>
             Cancel
           </Button>
         </DialogActions>
