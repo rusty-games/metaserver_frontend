@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
     listStyle: {
       overflowY: "auto",
       opacity: "0.92",
-      marginLeft: "25%",
+      marginLeft: "35%",
       marginRight: "25%",
       marginTop: "100px",
       marginBottom: "100px",
@@ -120,7 +120,7 @@ export function RoomPage() {
       <h2>
         Rooms:
       </h2>
-      <List>
+      <List style={{height: '50vh', overflow: 'auto'}}>
         <li>
           <ul>
             {roomList.map((room, index) => {

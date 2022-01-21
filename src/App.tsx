@@ -5,11 +5,12 @@ import { Games } from "./Pages/games";
 import { AdminLoginPage } from "./Pages/login";
 import { RoomPage } from "./Pages/rooms";
 import { WaitingRoom } from "./Pages/waiting_room";
+import gamingBackground from "./Resources/tlo4.jpg";
 
 function App() {
   return (
     <Router>
-      <div>
+      <div style={{height: '98vh', backgroundImage: `url(${gamingBackground})`,backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: 'center', width: '98vw'}}>
         <TopBar/>
         <Routes>
           <Route path="/" element={<Games/>}/>

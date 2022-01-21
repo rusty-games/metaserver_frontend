@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
     gameInfoStyle: {
       overflowY: "auto",
       opacity: "0.92",
-      marginLeft: "25%",
+      marginLeft: "32%",
       marginRight: "25%",
       marginTop: "100px",
       marginBottom: "100px",
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
     listStyle: {
       overflowY: "auto",
       opacity: "0.92",
-      marginLeft: "25%",
+      marginLeft: "15%",
       marginRight: "25%",
       marginBottom: "100px",
       minWidth: "500px",
@@ -168,7 +168,7 @@ export function WaitingRoom() {
                 <Typography>
                     Players:
                 </Typography>
-                <List>
+                <List style={{height: '50wh', overflow: 'auto'}}>
                   <li>
                   <ul>
                       {users.map((user, index) => {

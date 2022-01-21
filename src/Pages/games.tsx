@@ -19,9 +19,10 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: "20px",
     },
     listStyle: {
+      height: '85vh',
       overflowY: "auto",
       opacity: "0.92",
-      marginLeft: "25%",
+      marginLeft: "35%",
       marginRight: "25%",
       marginTop: "100px",
       marginBottom: "100px",
@@ -84,7 +85,7 @@ export function Games() {
                     component={Link}
                     to={`/games/${game.id}/rooms`}
                   >
-                    JOIN
+                    PLAY
                   </Button>
                 </ListItem>
               </div>
