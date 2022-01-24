@@ -7,6 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import { postRoom } from "../Api/roomApi";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,6 +46,7 @@ export function RoomButton() {
   const [openDialog, setOpenDialog] = React.useState(false);
   const [max_players, set_max_players] = useState<number>(10);
   const [name, setName] = useState<string>("");
+  const  navigate = useNavigate();
   const openCreateRoomDialog = () => {
     setOpenDialog(true);
   };
@@ -61,9 +63,10 @@ export function RoomButton() {
     const url = window.location.href;
     const game_id =
       url.match(/.*?\/games\/(?<game_id>[^/]*)\/rooms/)?.groups?.game_id || "";
-    postRoom(game_id, name, max_players);
+    let response = await postRoom(game_id, name, max_players);
     setOpenDialog(false);
-    window.location.reload();
+    navigate('/rooms/' + response.data?.id)
+    //window.location.reload();
   };
   return (
     <div>

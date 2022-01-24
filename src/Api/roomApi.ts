@@ -25,9 +25,9 @@ export const getRoomsInGame = async (id: string): Promise<IApiResponse<Room[]>> 
     .then((r) => axiosHandleResponse(r));
 }
 
-export const postRoom = async (id: string, name: string, max_players: number) => {
+export const postRoom = async (id: string, name: string, max_players: number): Promise<IApiResponse<Room>>  => {
   let data = {game: id, name: name, max_players: max_players}
-  axios.post(rooms_url, data, getRequestConfig());
+  return axios.post(rooms_url, data, getRequestConfig());
 }; 
 
 export const getRooms = async (): Promise<IApiResponse<Room[]>> => {
@@ -52,7 +52,7 @@ export const getRoom = async (id: string): Promise<IApiResponse<Room>> => {
 
 export const deleteRoom = async (id: string): Promise<IApiResponse<Room>> => {
   return axios
-    .delete(rooms_url + id , getRequestConfig())
+    .delete(rooms_url + id + '/' , getRequestConfig())
     .then((r) => axiosHandleResponse(r));
 };
 

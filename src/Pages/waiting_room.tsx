@@ -7,15 +7,16 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Game, getGame } from "../Api/gameApi";
-import { getRoom, Room } from "../Api/roomApi";
+import { deleteRoom, getRoom, Room } from "../Api/roomApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
-import { websocket_channel_url } from "../Api/urls";
+import { games_url, websocket_channel_url } from "../Api/urls";
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,7 +63,7 @@ export function WaitingRoom() {
     const [users, setUsers] = React.useState<string[]>([]);
     const [openAlert, setOpenAlert] = React.useState(true);
     let players_coutnt = 0;
-    
+    const  navigate = useNavigate();
     useEffect(() => {
         const url = window.location.href;
         const room_id =
@@ -104,10 +105,19 @@ export function WaitingRoom() {
                   }
                   else {
                     window.open(`${r_g.data?.files}?session_id=${json.payload.data.session_id}&is_host=false`);
-                  }                 
+                  }
+                  deleteRoom(room_id);
+           
+                  navigate('/games/' + (r.data?.game || "") + '/rooms')    
+                  //navigate();
+                                  
                 });
-              });
-              
+              });            
+            }
+            else if((json.payload.event === "PLAYER_LEFT")) {
+              console.log("PLAYER_LEFT");
+              players_coutnt -= 1;
+              setUsers(users => users.filter(user => user !== json.payload.data.name ));
             }
           }
           catch (err) {
