@@ -73,11 +73,9 @@ export function Games() {
   }, [getGamesTrigger]); 
   const deleteGameHandle = (id: string) => {
     deleteGame(id);
-    window.location.reload();
   };
   const acceptGame = (game: Game) => {
     patchGameAccept(game);
-    window.location.reload();
   };
   return (
     <List className={classes.listStyle}>

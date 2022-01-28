@@ -26,6 +26,13 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#FFFFFF",
       fontWeight: "bold",
     },
+    logoutButtonStyle: {
+      backgroundColor: "#823c4a",
+      marginLeft: "10px",
+      marginRight: "20px",
+      color: "#FFFFFF",
+      fontWeight: "bold",
+    },
   })
 );
 
@@ -52,7 +59,7 @@ export function TopBar() {
           {adminLoggedIn() ? (
             <Button
               variant="contained"
-              className={classes.buttonStyle}
+              className={classes.logoutButtonStyle}
               onClick={handleLogout}
             >
               Logout

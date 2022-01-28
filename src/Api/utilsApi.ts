@@ -54,19 +54,36 @@ export const getRequestConfig = () => {
   return {
     headers: {
       "Content-Type": "application/json",
-      //"X-CSRFToken": "TSJsRSKracSJqIFnSf45TvBox2vXL9fArMbBCNKSNmMoNVNKc4NVD6Ywp39eGK21"
-      //Authorization: "Bearer " + sessionStorage.getItem("token"),
     },
   };
 };
 
-export const getRequestedConfigFiles = () => {
+export const getRequestConfigFiles = () => {
   return {
     headers: {
       "Content-Type": "multipart/form-data",
-      "accept": "application/json"
-      //"X-CSRFToken": "TSJsRSKracSJqIFnSf45TvBox2vXL9fArMbBCNKSNmMoNVNKc4NVD6Ywp39eGK21"
-      //Authorization: "Bearer " + sessionStorage.getItem("token"),
+      "accept": "application/json",
+    },
+  };
+};
+
+export const getAdminRequestConfig = () => {
+  console.log(sessionStorage.getItem("token"));
+  return {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + sessionStorage.getItem("token"),
+    },
+  };
+};
+
+export const getAdminRequestConfigFiles = () => {
+  console.log(sessionStorage.getItem("token"));
+  return {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "accept": "application/json",
+      Authorization: "Bearer " + sessionStorage.getItem("token"),
     },
   };
 };

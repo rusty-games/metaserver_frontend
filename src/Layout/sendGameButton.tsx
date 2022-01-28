@@ -112,7 +112,6 @@ export function SendGameButton() {
   const sendGame = async () => {
       postGame(title, description, file);
       setOpenDialog(false);
-      window.location.reload();
   };
   const fileChange = (event: any) => {
     if (!event?.target.files[0].name.includes(".zip")) {

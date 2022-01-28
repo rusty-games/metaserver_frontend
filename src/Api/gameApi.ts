@@ -1,10 +1,12 @@
 import axios from "axios";
 import {
   axiosHandleResponse,
-  getRequestedConfigFiles,
+  getRequestConfigFiles,
   getRequestConfig,
   handleError,
   IApiResponse,
+  getAdminRequestConfig,
+  getAdminRequestConfigFiles,
 } from "./utilsApi";
 import { games_accepted_url, games_not_accepted_url, games_url } from "./urls";
 
@@ -31,8 +33,9 @@ export const postGame = async (name: string, description: string, file: any, acc
   } else {
     data.append('accepted', accepted.valueOf.toString());
   }
-  axios.post(games_url, data, getRequestedConfigFiles())
+  axios.post(games_url, data, getRequestConfigFiles())
     .then((r) => axiosHandleResponse(r))
+    .then(() =>  window.location.reload())
     .catch((err) => { handleError(err); return err; });
 };
 
@@ -69,15 +72,16 @@ export const patchGameAccept = async (game: Game): Promise<IApiResponse<Game>> =
   data.append('name', game.name);
   data.append('description', game.description);
   data.append('accepted', 'true');
-  return axios.patch(games_url + game.id + '/', data, getRequestedConfigFiles())
+  return axios.patch(games_url + game.id + '/', data, getAdminRequestConfigFiles())
     .then((r) => axiosHandleResponse(r))
+    .then(() =>  window.location.reload())
     .catch((err) => { handleError(err); return err; });
 }
 
 export const deleteGame = async (id: string): Promise<IApiResponse<Game>> => {
   return axios
-    .delete(games_url + id + '/', getRequestConfig())
+    .delete(games_url + id + '/', getAdminRequestConfig())
     .then((r) => axiosHandleResponse(r))
+    .then(() =>  window.location.reload())
     .catch((err) => { handleError(err); return err; });
 }
-
