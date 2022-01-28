@@ -33,6 +33,15 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: "white",
       color: "white",
     },
+    gameInfoStyle: {
+      overflowY: "auto",
+      opacity: "0.92",
+      marginLeft: "32%",
+      marginRight: "25%",
+      marginTop: "100px",
+      marginBottom: "100px",
+      minWidth: "500px",
+    },
   })
 );
 
@@ -57,7 +66,7 @@ export const AdminLoginPage = () => {
     }
   };
   return (
-    <div className={classes.windowContainer}>
+    <div className={classes.gameInfoStyle}>
       <Box display="flex" flexDirection="row" p={1} m={1} alignSelf="center">
         <Container fixed className={classes.formContainer}>
           <div className={classes.welcomeLabel}>Log in as Administrator</div>

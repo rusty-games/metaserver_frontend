@@ -64,15 +64,15 @@ export const getGame = async (id: string): Promise<IApiResponse<Game>> => {
     });
 }
 
-export const patchGame = async (id: string, name: string, description: string, accepted: boolean): Promise<IApiResponse<Game>> => {
+export const patchGameAccept = async (id: string, accepted: boolean): Promise<IApiResponse<Game>> => {
   return axios
-    .patch(games_url + id, { name: name, description: description, accepted: accepted, id: id }, getRequestConfig())
+    .patch(games_url + id + '/', { accepted: accepted}, getRequestConfig())
     .then((r) => axiosHandleResponse(r));
 }
 
 export const deleteGame = async (id: string): Promise<IApiResponse<Game>> => {
   return axios
-    .delete(games_url + id, getRequestConfig())
+    .delete(games_url + id + '/', getRequestConfig())
     .then((r) => axiosHandleResponse(r))
     .catch((err) => { handleError(err); return err; });;
 }

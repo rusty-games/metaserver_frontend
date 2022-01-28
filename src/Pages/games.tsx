@@ -7,10 +7,11 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import { Game, getGames } from "../Api/gameApi";
+import { Game, getGames, getGamesAccepted, getGamesNotAccepted, deleteGame, patchGameAccept } from "../Api/gameApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
 import { games_url } from "../Api/urls";
+import { adminLoggedIn } from "../Layout/topbar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       overflowY: "auto",
       opacity: "0.92",
       marginLeft: "35%",
-      marginRight: "25%",
+      marginRight: "5%",
       marginTop: "100px",
       marginBottom: "100px",
       minWidth: "500px",
@@ -51,14 +52,33 @@ export function Games() {
     setSelectedIndex(index);
   };
   useEffect(() => {
-    getGames().then((r) => {
-      if (r.isError) {
-        window.location.href = "/login";
-        return;
-      }
-      setGameList(r.data || []);
-    });
-  }, [getGamesTrigger]);
+    if(!adminLoggedIn() === true) {
+      getGamesAccepted().then((r) => {
+        if (r.isError) {
+          window.location.href = "/login";
+          return;
+        }
+        setGameList(r.data || []);
+      });
+    }
+    else {
+      getGames().then((r) => {
+        if (r.isError) {
+          console.log(r.data);
+          return;
+        }
+        setGameList(r.data || []);
+      });
+    }
+  }, [getGamesTrigger]); 
+  const deleteGameHandle = (id: string) => {
+    deleteGame(id);
+    window.location.reload();
+  };
+  const acceptGame = (game: Game) => {
+    patchGameAccept(game.id, true);
+    //window.location.reload();
+  };
   return (
     <List className={classes.listStyle}>
       <li>
@@ -78,15 +98,33 @@ export function Games() {
                     <Typography variant="h3">
                         {game.name}
                     </Typography>
-                    <ListItemText primary={game.description} style={{overflowY: 'auto', height: '100px'}}/>
+                    <ListItemText primary={game.description} style={{overflowY: 'auto', height: '100px', width: '80%'}}/>
                   </div>
-                  <Button
-                    className={classes.buttonStyle}
-                    component={Link}
-                    to={`/games/${game.id}/rooms`}
-                  >
-                    PLAY
-                  </Button>
+                  {adminLoggedIn() && !game.accepted ? (
+                    <div>
+                      <Button
+                      className={classes.buttonStyle}
+                      onClick={() => deleteGameHandle(game.id)}
+                      >
+                        DELETE
+                      </Button>
+                      <Button
+                        className={classes.buttonStyle}
+                        onClick={() => acceptGame(game)}
+                        >
+                        ACCEPT
+                      </Button>
+                    </div>
+                    )
+                  : (
+                    <Button
+                      className={classes.buttonStyle}
+                      component={Link}
+                      to={`/games/${game.id}/rooms`}
+                    >
+                      PLAY
+                    </Button>
+                    )}         
                 </ListItem>
               </div>
             );

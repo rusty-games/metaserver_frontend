@@ -32,17 +32,16 @@ const axiosHandleLoginResponse = async <T>(
   }
 };
 
-export const postLogin = async (login: string, password: string) => {
+export const postLogin = async (username: string, password: string) => {
   axios
     .post(login_url, {
-      login: login,
+      username: username,
       password: password,
     })
     .then((r) => axiosHandleLoginResponse(r))
     .catch((r) => {
       if (r.response.status === 401) alert("Bad credentials");
-      else console.log("error");
-      alert("Error");
+      else alert("error");
     });
 };
 

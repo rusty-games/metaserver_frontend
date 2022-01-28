@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       opacity: "0.95",
       borderRadius: "15px",
       height: "320px",
-      width: "500px",
+      width: "550px",
     },
     textFieldStyle: {
       marginTop: "10px",
