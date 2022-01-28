@@ -64,16 +64,20 @@ export const getGame = async (id: string): Promise<IApiResponse<Game>> => {
     });
 }
 
-export const patchGameAccept = async (id: string, accepted: boolean): Promise<IApiResponse<Game>> => {
-  return axios
-    .patch(games_url + id + '/', { accepted: accepted}, getRequestConfig())
-    .then((r) => axiosHandleResponse(r));
+export const patchGameAccept = async (game: Game): Promise<IApiResponse<Game>> => {
+  let data = new FormData();
+  data.append('name', game.name);
+  data.append('description', game.description);
+  data.append('accepted', 'true');
+  return axios.patch(games_url + game.id + '/', data, getRequestedConfigFiles())
+    .then((r) => axiosHandleResponse(r))
+    .catch((err) => { handleError(err); return err; });
 }
 
 export const deleteGame = async (id: string): Promise<IApiResponse<Game>> => {
   return axios
     .delete(games_url + id + '/', getRequestConfig())
     .then((r) => axiosHandleResponse(r))
-    .catch((err) => { handleError(err); return err; });;
+    .catch((err) => { handleError(err); return err; });
 }
 

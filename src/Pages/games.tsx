@@ -76,8 +76,8 @@ export function Games() {
     window.location.reload();
   };
   const acceptGame = (game: Game) => {
-    patchGameAccept(game.id, true);
-    //window.location.reload();
+    patchGameAccept(game);
+    window.location.reload();
   };
   return (
     <List className={classes.listStyle}>
