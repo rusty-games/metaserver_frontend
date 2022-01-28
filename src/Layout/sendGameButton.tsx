@@ -5,7 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@material-ui/core/TextField";
-import { postGame } from "../Api/gameApi";
+import { Game, getGames, postGame } from "../Api/gameApi";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import { styled } from '@mui/material/styles';
 
@@ -47,6 +47,8 @@ const Input = styled('input')({
 
 export function SendGameButton() {
   const classes = useStyles();
+  const [gameList, setGameList] = React.useState<Game[]>([]);
+  const [getGamesTrigger, setGamesTrigger] = React.useState(true);
   const [openDialog, setOpenDialog] = React.useState(false);
   const [title, setTitle] = useState<string>("Example title");
   const [description, setDescription] = useState<string>(
@@ -58,27 +60,48 @@ export function SendGameButton() {
   const [fileExtensionValidation, setFileExtensionValidation] = useState<Boolean>(false);
   const [fileValidation, setFileValidation] = useState<Boolean>(false);
 
+  useEffect(() => {
+    getGames().then((r) => {
+      if (r.isError) {
+        console.log(r.data);
+        return;
+      }
+      setGameList(r.data || []);
+    });
+  }, [getGamesTrigger]);
+
   const openSendGameDialog = () => {
+    setGamesTrigger(!getGamesTrigger);
+    setFileNameValidator(false);
+    setHelperText("Title cannot be empty");
     setOpenDialog(true);
   };
   const closeSendGameDialog = () => {
     setOpenDialog(false);
   };
+  const gameNameIsUnique = (title: String): boolean => {
+    for (let game of gameList) {
+      if (game.name === title)
+        return false;
+    }
+    return true;
+  }
   const handleChangeTitle = (title: string) => {
     setFileValidation(false);
-    if(title == "") {
+    if (title == "") {
       setFileNameValidator(false);
       setHelperText("Title cannot be empty");
-    }
-    else if(/^[a-zA-z0-9\s]+$/.test(title)) {
+    } else if (!gameNameIsUnique(title)) {
+      setFileNameValidator(false)
+      setHelperText("Game with this name already exists in the database");
+    } else if (/^[a-zA-z0-9\s]+$/.test(title)) {
       setTitle(title);
       setFileNameValidator(true);
       setHelperText("Numbers and english letters are only allowed");
-      if(fileExtensionValidation) {
+      if (fileExtensionValidation) {
         setFileValidation(true);
       }
-    }
-    else {
+    } else {
       setFileNameValidator(false);
       setHelperText("Numbers and english letters are only allowed");
     }
@@ -87,20 +110,20 @@ export function SendGameButton() {
     setDescription(description);
   };
   const sendGame = async () => {
-    postGame(title, description, file);
-    setOpenDialog(false);
-    window.location.reload();
+      postGame(title, description, file);
+      setOpenDialog(false);
+      window.location.reload();
   };
   const fileChange = (event: any) => {
-    if(!event?.target.files[0].name.includes(".zip")){
+    if (!event?.target.files[0].name.includes(".zip")) {
       setFileValidation(false);
       setFileExtensionValidation(false);
     }
     else {
       setFile(event?.target.files[0]);
       setFileExtensionValidation(true);
-      if(fileNameValidator) setFileValidation(true);
-    }  
+      if (fileNameValidator) setFileValidation(true);
+    }
   }
   return (
     <div>
@@ -136,7 +159,7 @@ export function SendGameButton() {
             <TextField
               fullWidth
               id="input_zip_name"
-              helperText= "Only .zip files are accepted"
+              helperText="Only .zip files are accepted"
               error={!fileExtensionValidation}
               variant="filled"
               className={classes.zipTextFieldStyle}
@@ -146,7 +169,7 @@ export function SendGameButton() {
               value={file?.name}
             />
             <label htmlFor="contained-button-file">
-              <Input accept=".zip" id="contained-button-file" multiple type="file" onChange={fileChange}/>
+              <Input accept=".zip" id="contained-button-file" multiple type="file" onChange={fileChange} />
               <Button variant="contained" className={classes.zipButtonStyle} component="span">
                 Upload .zip
               </Button>
@@ -155,7 +178,7 @@ export function SendGameButton() {
         </DialogContent>
         <DialogActions>
           <Button variant="contained" onClick={sendGame} disabled={!fileValidation}>
-            Send 
+            Send
           </Button>
           <Button variant="contained" onClick={closeSendGameDialog}>
             Cancel
