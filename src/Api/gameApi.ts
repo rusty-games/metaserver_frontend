@@ -35,7 +35,7 @@ export const postGame = async (name: string, description: string, file: any, acc
   }
   axios.post(games_url, data, getRequestConfigFiles())
     .then((r) => axiosHandleResponse(r))
-    .then(() =>  window.location.reload())
+    .then(() => window.location.reload())
     .catch((err) => { handleError(err); return err; });
 };
 
@@ -74,7 +74,7 @@ export const patchGameAccept = async (game: Game): Promise<IApiResponse<Game>> =
   data.append('accepted', 'true');
   return axios.patch(games_url + game.id + '/', data, getAdminRequestConfigFiles())
     .then((r) => axiosHandleResponse(r))
-    .then(() =>  window.location.reload())
+    .then(() => window.location.reload())
     .catch((err) => { handleError(err); return err; });
 }
 
@@ -82,6 +82,15 @@ export const deleteGame = async (id: string): Promise<IApiResponse<Game>> => {
   return axios
     .delete(games_url + id + '/', getAdminRequestConfig())
     .then((r) => axiosHandleResponse(r))
-    .then(() =>  window.location.reload())
+    .then(() => window.location.reload())
     .catch((err) => { handleError(err); return err; });
+}
+
+export const downloadGame = (game: Game) => {
+  let url = game.files.replace("/index.html", ".zip");
+  let link = document.createElement("a");
+  link.href = url;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }

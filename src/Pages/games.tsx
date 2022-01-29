@@ -7,10 +7,9 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import { Game, getGames, getGamesAccepted, getGamesNotAccepted, deleteGame, patchGameAccept } from "../Api/gameApi";
+import { Game, getGames, getGamesAccepted, deleteGame, patchGameAccept, downloadGame } from "../Api/gameApi";
 import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
-import { games_url } from "../Api/urls";
 import { adminLoggedIn } from "../Layout/topbar";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -71,7 +70,10 @@ export function Games() {
       });
     }
   }, [getGamesTrigger]); 
-  const deleteGameHandle = (id: string) => {
+  const handleDownloadGame = (game: Game) => {
+    downloadGame(game);
+  };
+  const handleDeleteGame = (id: string) => {
     deleteGame(id);
   };
   const acceptGame = (game: Game) => {
@@ -102,7 +104,12 @@ export function Games() {
                     <div>
                       <Button
                       className={classes.buttonStyle}
-                      onClick={() => deleteGameHandle(game.id)}
+                      onClick={() => handleDownloadGame(game)}
+                      >
+                        DOWNLOAD
+                      </Button><Button
+                      className={classes.buttonStyle}
+                      onClick={() => handleDeleteGame(game.id)}
                       >
                         DELETE
                       </Button>
