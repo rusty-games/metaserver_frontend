@@ -7,15 +7,14 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core";
-import { Game, getGame as getGame } from "../Api/gameApi";
-import { getRoomsInGame as getRoomsInGame, Room } from "../Api/roomApi";
-import logo from "./exampleLogo.png";
+import { Game, getGame } from "../Api/gameApi";
+import { getRoomsInGame, Room } from "../Api/roomApi";
 import { Link } from "react-router-dom";
 import { RoomButton } from "../Layout/createRoomButton";
+import { getLogoUrl } from "../Api/utilsApi";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     logoStyle: {
-      border: "solid 2px #6d6875",
       marginRight: "20px",
     },
     listStyle: {
@@ -52,17 +51,10 @@ export function RoomPage() {
   const classes = useStyles();
   const [roomList, setRoomList] = React.useState<Room[]>([]);
   const [game, setGame] = React.useState<Game>();
-  const [getDataTrigger, setDataTrigger] = React.useState(true);
+  const [getDataTrigger] = React.useState(true);
   const [, setSelectedIndex] = React.useState(0);
   const handleListItemClick = (index: number) => {
     setSelectedIndex(index);
-  };
-  const openGameInNewPage = () => {
-    if (game == undefined) {
-      return;
-    }
-    let gameUrl = game.files;
-    window.open(gameUrl);
   };
 
   useEffect(() => {
@@ -97,8 +89,8 @@ export function RoomPage() {
     <div className={classes.listStyle}>
       <div className={classes.listItemStyle}>
         <img
-          src={logo}
-          alt="logo"
+          src={getLogoUrl(game)}
+          alt="game logo"
           width="150"
           height="150"
           className={classes.logoStyle}
@@ -128,7 +120,7 @@ export function RoomPage() {
                   <ListItem onClick={() => handleListItemClick(index)} className={classes.listItemStyle}>
                     <ListItemText primary={`${room.name} (Players: ${room.current_players}/${room.max_players})`} />
                     <Button
-                      disabled={room.current_players==room.max_players}
+                      disabled={room.current_players === room.max_players}
                       variant="contained"
                       className={classes.buttonStyleJoin}
                       component={Link}

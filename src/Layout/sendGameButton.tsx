@@ -88,7 +88,7 @@ export function SendGameButton() {
   }
   const handleChangeTitle = (title: string) => {
     setFileValidation(false);
-    if (title == "") {
+    if (title === "") {
       setFileNameValidator(false);
       setHelperText("Title cannot be empty");
     } else if (!gameNameIsUnique(title)) {

@@ -8,14 +8,14 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Game, getGames, getGamesAccepted, deleteGame, patchGameAccept, downloadGame } from "../Api/gameApi";
-import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
 import { adminLoggedIn } from "../Layout/topbar";
+import { getLogoUrl } from "../Api/utilsApi";
+import placeholderLogo from "../Resources/placeholderLogo.png";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     logoStyle: {
-      border: "solid 2px #6d6875",
       marginRight: "20px",
     },
     listStyle: {
@@ -90,11 +90,15 @@ export function Games() {
               <div key={game.id}>
                 <ListItem onClick={() => handleListItemClick(index)} className={classes.listItemStyle}>
                   <img
-                    src={logo}
-                    alt="logo"
+                    alt="game logo"
                     width="150"
                     height="150"
                     className={classes.logoStyle}
+                    src={getLogoUrl(game)}
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null; // prevents looping
+                      currentTarget.src = placeholderLogo;
+                    }}
                   />
                   <div style={{ flexGrow: 1 }}>
                     <Typography variant="h3">

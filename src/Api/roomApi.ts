@@ -15,20 +15,25 @@ export interface Room {
   current_players: number;
 }
 
-interface Rooms {
-  games: Room[];
-}
-
 export const getRoomsInGame = async (id: string): Promise<IApiResponse<Room[]>> => {
   return axios
     .get(games_url + id + "/rooms/", getRequestConfig())
-    .then((r) => axiosHandleResponse(r));
+    .then((r) => axiosHandleResponse(r))
+    .catch((err) => {
+      handleError(err);
+      return err;
+    });
 }
 
-export const postRoom = async (id: string, name: string, max_players: number): Promise<IApiResponse<Room>>  => {
-  let data = {game: id, name: name, max_players: max_players}
-  return axios.post(rooms_url, data, getRequestConfig());
-}; 
+export const postRoom = async (id: string, name: string, max_players: number): Promise<IApiResponse<Room>> => {
+  let data = { game: id, name: name, max_players: max_players }
+  return axios
+    .post(rooms_url, data, getRequestConfig())
+    .catch((err) => {
+      handleError(err);
+      return err;
+    });
+};
 
 export const getRooms = async (): Promise<IApiResponse<Room[]>> => {
   return axios
@@ -52,7 +57,11 @@ export const getRoom = async (id: string): Promise<IApiResponse<Room>> => {
 
 export const deleteRoom = async (id: string): Promise<IApiResponse<Room>> => {
   return axios
-    .delete(rooms_url + id + '/' , getRequestConfig())
-    .then((r) => axiosHandleResponse(r));
+    .delete(rooms_url + id + '/', getRequestConfig())
+    .then((r) => axiosHandleResponse(r))
+    .catch((err) => {
+      handleError(err);
+      return err;
+    });
 };
 

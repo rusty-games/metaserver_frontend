@@ -20,21 +20,19 @@ export interface Game {
   updated_at: string;
 }
 
-interface Games {
-  games: Game[];
-}
-
 export const postGame = async (name: string, description: string, file: any, accepted?: boolean) => {
   let data = new FormData();
   data.append('name', name);
   data.append('description', description);
-  if (accepted == undefined) {
+  if (accepted === undefined) {
     data.append('files', file, file.name);
   } else {
     data.append('accepted', accepted.valueOf.toString());
   }
   axios.post(games_url, data, getRequestConfigFiles())
-    .then((r) => axiosHandleResponse(r))
+    .then((r) => {
+      axiosHandleResponse(r);
+    })
     .then(() => window.location.reload())
     .catch((err) => { handleError(err); return err; });
 };

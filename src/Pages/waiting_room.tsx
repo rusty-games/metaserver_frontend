@@ -8,20 +8,19 @@ import {
 } from "@material-ui/core";
 import { Game, getGame } from "../Api/gameApi";
 import { deleteRoom, getRoom, Room } from "../Api/roomApi";
-import logo from "./exampleLogo.png";
 import { Link } from "react-router-dom";
-import { games_url, websocket_channel_url } from "../Api/urls";
+import { websocket_channel_url } from "../Api/urls";
 import Alert from '@mui/material/Alert';
 import Collapse from '@mui/material/Collapse';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from "react-router-dom";
+import { getLogoUrl } from "../Api/utilsApi";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     logoStyle: {
-      border: "solid 2px #6d6875",
       marginRight: "20px",
     },
     gameInfoStyle: {
@@ -100,7 +99,7 @@ export function WaitingRoom() {
             else if((json.payload.event === "START_GAME")) {
               getRoom(room_id).then((r) => {
                 getGame(r.data?.game || "").then((r_g) => {
-                  if (r.data?.max_players == players_coutnt ) {
+                  if (r.data?.max_players === players_coutnt ) {
                     window.open(`${r_g.data?.files}?session_id=${json.payload.data.session_id}&is_host=true`);
                   }
                   else {
@@ -131,8 +130,8 @@ export function WaitingRoom() {
         <div className={classes.gameInfoStyle}>
             <div className={classes.listItemStyle}>
                 <img
-                    src={logo}
-                    alt="logo"
+                    src={getLogoUrl(game)}
+                    alt="game logo"
                     width="150"
                     height="150"
                     className={classes.logoStyle}

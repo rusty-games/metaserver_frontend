@@ -1,4 +1,7 @@
 import { AxiosResponse } from "axios";
+import { Game } from "./gameApi";
+import placeholderLogo from "../Resources/placeholderLogo.png";
+import { BASE_URL } from "./urls";
 
 export interface IApiResponse<T> {
   isError: boolean;
@@ -50,6 +53,18 @@ export const handleError = async <T>(error: any): Promise<IApiResponse<T>> => {
   };
 };
 
+export const getLogoUrl = (game: Game | undefined): string => {
+  if (game === undefined)
+    return placeholderLogo;
+
+  let result = game.files.replace("index.html", "logo.png");
+
+  if (result.startsWith("http"))
+    return result;
+  else
+    return BASE_URL + result;
+}
+
 export const getRequestConfig = () => {
   return {
     headers: {
@@ -68,7 +83,6 @@ export const getRequestConfigFiles = () => {
 };
 
 export const getAdminRequestConfig = () => {
-  console.log(sessionStorage.getItem("token"));
   return {
     headers: {
       "Content-Type": "application/json",
@@ -78,7 +92,6 @@ export const getAdminRequestConfig = () => {
 };
 
 export const getAdminRequestConfigFiles = () => {
-  console.log(sessionStorage.getItem("token"));
   return {
     headers: {
       "Content-Type": "multipart/form-data",
