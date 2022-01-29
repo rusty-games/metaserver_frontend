@@ -52,7 +52,7 @@ export const postLogout = async () => {
       axiosHandleResponse(r);
       sessionStorage.clear();
     })
-    .then(() => window.location.href = "/")
+    .then(() => window.location.reload())
     .catch(() => {
       console.log("error");
     });

@@ -104,17 +104,20 @@ export function Games() {
                     <div>
                       <Button
                       className={classes.buttonStyle}
+                      variant="contained"
                       onClick={() => handleDownloadGame(game)}
                       >
                         DOWNLOAD
                       </Button><Button
                       className={classes.buttonStyle}
+                      variant="contained"
                       onClick={() => handleDeleteGame(game.id)}
                       >
                         DELETE
                       </Button>
                       <Button
                         className={classes.buttonStyle}
+                        variant="contained"
                         onClick={() => acceptGame(game)}
                         >
                         ACCEPT
@@ -124,6 +127,7 @@ export function Games() {
                   : (
                     <Button
                       className={classes.buttonStyle}
+                      variant="contained"
                       component={Link}
                       to={`/games/${game.id}/rooms`}
                     >

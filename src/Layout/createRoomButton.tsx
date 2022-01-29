@@ -66,7 +66,6 @@ export function RoomButton() {
     let response = await postRoom(game_id, name, max_players);
     setOpenDialog(false);
     navigate('/rooms/' + response.data?.id)
-    //window.location.reload();
   };
   return (
     <div>
