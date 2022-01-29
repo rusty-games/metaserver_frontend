@@ -38,6 +38,8 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: "10px",
       color: "#000000",
       fontWeight: "bold",
+      marginTop: "5px",
+      marginBottom: "5px",
     },
   })
 );
@@ -51,7 +53,7 @@ export function Games() {
     setSelectedIndex(index);
   };
   useEffect(() => {
-    if(!adminLoggedIn() === true) {
+    if (!adminLoggedIn() === true) {
       getGamesAccepted().then((r) => {
         if (r.isError) {
           window.location.href = "/login";
@@ -69,7 +71,7 @@ export function Games() {
         setGameList(r.data || []);
       });
     }
-  }, [getGamesTrigger]); 
+  }, [getGamesTrigger]);
   const handleDownloadGame = (game: Game) => {
     downloadGame(game);
   };
@@ -94,37 +96,48 @@ export function Games() {
                     height="150"
                     className={classes.logoStyle}
                   />
-                  <div style={{flexGrow: 1}}>
+                  <div style={{ flexGrow: 1 }}>
                     <Typography variant="h3">
-                        {game.name}
+                      {game.name}
                     </Typography>
-                    <ListItemText primary={game.description} style={{overflowY: 'auto', height: '100px', width: '80%'}}/>
+                    <ListItemText primary={game.description} style={{ overflowY: 'auto', height: '100px', width: '80%' }} />
                   </div>
-                  {adminLoggedIn() && !game.accepted ? (
+                  {adminLoggedIn() ? (
                     <div>
+                      {!game.accepted ? (
+                        <Button
+                          className={classes.buttonStyle}
+                          variant="contained"
+                          onClick={() => acceptGame(game)}
+                        >
+                          ACCEPT
+                        </Button>
+                      ) : (
+                        <Button
+                          className={classes.buttonStyle}
+                          variant="contained"
+                          component={Link}
+                          to={`/games/${game.id}/rooms`}
+                        >
+                          PLAY
+                        </Button>
+                      )}
                       <Button
-                      className={classes.buttonStyle}
-                      variant="contained"
-                      onClick={() => handleDownloadGame(game)}
-                      >
-                        DOWNLOAD
-                      </Button><Button
-                      className={classes.buttonStyle}
-                      variant="contained"
-                      onClick={() => handleDeleteGame(game.id)}
+                        className={classes.buttonStyle}
+                        variant="contained"
+                        onClick={() => handleDeleteGame(game.id)}
                       >
                         DELETE
                       </Button>
                       <Button
                         className={classes.buttonStyle}
                         variant="contained"
-                        onClick={() => acceptGame(game)}
-                        >
-                        ACCEPT
+                        onClick={() => handleDownloadGame(game)}
+                      >
+                        DOWNLOAD
                       </Button>
                     </div>
-                    )
-                  : (
+                  ) : (
                     <Button
                       className={classes.buttonStyle}
                       variant="contained"
@@ -133,7 +146,7 @@ export function Games() {
                     >
                       PLAY
                     </Button>
-                    )}         
+                  )}
                 </ListItem>
               </div>
             );
