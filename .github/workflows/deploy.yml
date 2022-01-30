@@ -25,7 +25,7 @@ jobs:
         run: npm install && npm run build --release
         env:
           CI: false
-          BACKEND_URL: ${{ secrets.BACKEND_URL }}
+          REACT_APP_BACKEND_URL: ${{ secrets.REACT_APP_BACKEND_URL }}
       - name: Deploy app build to S3 bucket
         run: aws s3 sync ./build/ s3://rusty-games-metaserver --delete --acl public-read
         env:
