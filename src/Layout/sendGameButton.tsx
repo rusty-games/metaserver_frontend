@@ -6,40 +6,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@material-ui/core/TextField";
 import { Game, getGames, postGame } from "../Api/gameApi";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import { styled } from '@mui/material/styles';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    dialogStyle: {
-      display: "flex",
-      flexDirection: "column",
-      opacity: "0.95",
-      borderRadius: "15px",
-      height: "320px",
-      width: "550px",
-    },
-    textFieldStyle: {
-      marginTop: "10px",
-    },
-    zipTextFieldStyle: {
-      marginTop: "10px",
-      width: "350px",
-    },
-    buttonStyle: {
-      backgroundColor: "#b5838d",
-      marginLeft: "10px",
-      marginTop: "10px",
-      marginBottom: "10px",
-      color: "#FFFFFF",
-      fontWeight: "bold",
-    },
-    zipButtonStyle: {
-      marginTop: "15px",
-      marginLeft: "10px",
-    },
-  })
-);
+import { useStyles } from "../Styles/style"
 
 const Input = styled('input')({
   display: 'none',
@@ -129,13 +97,13 @@ export function SendGameButton() {
       <Button
         variant="contained"
         onClick={openSendGameDialog}
-        className={classes.buttonStyle}
+        className={classes.defaultButtonStyle}
       >
         Send Game
       </Button>
       <Dialog open={openDialog}>
         <DialogTitle>Send new game</DialogTitle>
-        <DialogContent className={classes.dialogStyle}>
+        <DialogContent className={classes.sendGameDialogStyle}>
           <TextField
             error={!fileNameValidator}
             helperText={helperText}

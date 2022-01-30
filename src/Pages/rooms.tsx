@@ -1,4 +1,3 @@
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import React, { useEffect } from "react";
 import {
@@ -12,40 +11,8 @@ import { getRoomsInGame, Room } from "../Api/roomApi";
 import { Link } from "react-router-dom";
 import { RoomButton } from "../Layout/createRoomButton";
 import { getLogoUrl } from "../Api/utilsApi";
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    logoStyle: {
-      marginRight: "20px",
-    },
-    listStyle: {
-      overflowY: "auto",
-      opacity: "0.92",
-      marginLeft: "35%",
-      marginRight: "25%",
-      marginTop: "100px",
-      marginBottom: "100px",
-      minWidth: "500px",
-    },
-    listItemStyle: {
-      width: "100%",
-      display: "flex",
-    },
-    returnButtonStyle: {
-      backgroundColor: "#b5838d",
-      width: "150px",
-      marginTop: "10px",
-      marginBottom: "10px",
-      color: "#FFFFFF",
-      fontWeight: "bold",
-    },
-    buttonStyleJoin: {
-      backgroundColor: "#ffcdb2",
-      marginTop: "10px",
-      color: "#000000",
-      fontWeight: "bold",
-    },
-  })
-);
+import placeholderLogo from "../Resources/placeholderLogo.png";
+import { useStyles } from "../Styles/style"
 
 export function RoomPage() {
   const classes = useStyles();
@@ -89,11 +56,15 @@ export function RoomPage() {
     <div className={classes.listStyle}>
       <div className={classes.listItemStyle}>
         <img
-          src={getLogoUrl(game)}
           alt="game logo"
           width="150"
           height="150"
           className={classes.logoStyle}
+          src={getLogoUrl(game)}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null; // prevents looping
+            currentTarget.src = placeholderLogo;
+          }}
         />
         <div style={{ flexGrow: 1 }}>
           <Typography variant="h3">
@@ -103,38 +74,36 @@ export function RoomPage() {
         </div>
       </div>
       <div className={classes.listItemStyle}>
-        <Button component={Link} to={`/games/`} variant="contained" className={classes.returnButtonStyle}>
-            Return
+        <Button component={Link} to={`/games/`} variant="contained" className={classes.defaultButtonStyle}>
+          Return
         </Button>
         <RoomButton />
       </div>
-      <h2>
-        Rooms:
-      </h2>
-      <List style={{height: '50vh', overflow: 'auto'}}>
-        <li>
-          <ul>
-            {roomList.map((room, index) => {
-              return (
-                <div key={room.id}>
-                  <ListItem onClick={() => handleListItemClick(index)} className={classes.listItemStyle}>
-                    <ListItemText primary={`${room.name} (Players: ${room.current_players}/${room.max_players})`} />
-                    <Button
-                      disabled={room.current_players === room.max_players}
-                      variant="contained"
-                      className={classes.buttonStyleJoin}
-                      component={Link}
-                      to={`/rooms/${room.id}`}
-                    >
-                      JOIN
-                    </Button>
-                  </ListItem>
-                </div>
-              );
-            })}
-          </ul>
-        </li>
-      </List>
+      <div className={classes.smallListStyle}>
+        <Typography variant="h5">
+          Rooms:
+        </Typography>
+        <List style={{ overflow: 'auto'}}>
+          {roomList.map((room, index) => {
+            return (
+              <div key={room.id}>
+                <ListItem onClick={() => handleListItemClick(index)} className={classes.listItemStyle}>
+                  <ListItemText primary={`${room.name} (Players: ${room.current_players}/${room.max_players})`} />
+                  <Button
+                    disabled={room.current_players === room.max_players}
+                    variant="contained"
+                    className={classes.defaultButtonStyle}
+                    component={Link}
+                    to={`/rooms/${room.id}`}
+                  >
+                    JOIN
+                  </Button>
+                </ListItem>
+              </div>
+            );
+          })}
+        </List>
+      </div>
     </div>
   )
 }

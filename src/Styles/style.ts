@@ -1,0 +1,125 @@
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+} from "@material-ui/core/styles";
+export const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    toolbar: {
+      display: "flex",
+      justifyContent: "space-between",
+      backgroundColor: "#6d6875",
+      width: "inherit",
+    },
+    logoStyle: {
+      marginRight: "20px",
+    },
+    listStyle: {
+      height: '75vh',
+      overflowY: "auto",
+      opacity: "0.92",
+      marginLeft: "35%",
+      marginRight: "5%",
+      marginTop: "20px",
+      marginBottom: "20px",
+    },
+    smallListStyle: {
+      marginLeft: '15%',
+      marginTop: '20px',
+      marginBottom: '20px',
+    },
+    listItemStyle: {
+      width: "100%",
+      minWidth: "300px",
+      display: "flex",
+    },
+    gameListItemStyle: {
+      height: "160px",
+      width: "100%",
+      display: "flex",
+    },
+    defaultButtonStyle: {
+      backgroundColor: "#b5838d",
+      marginTop: "5px",
+      marginBottom: "5px",
+      marginLeft: "5px",
+      marginRight: "5px",
+      color: "#FFFFFF",
+      fontWeight: "bold",
+    },
+    greenButtonStyle: {
+      backgroundColor: "#5bb367",
+      marginTop: "5px",
+      marginBottom: "5px",
+      marginLeft: "5px",
+      marginRight: "5px",
+      color: "#FFFFFF",
+      fontWeight: "bold",
+    },
+    redButtonStyle: {
+      backgroundColor: "#bd4a4a",
+      marginTop: "5px",
+      marginBottom: "5px",
+      marginLeft: "5px",
+      marginRight: "5px",
+      color: "#FFFFFF",
+      fontWeight: "bold",
+    },
+    sendGameDialogStyle: {
+      display: "flex",
+      flexDirection: "column",
+      opacity: "0.95",
+      borderRadius: "15px",
+      height: "320px",
+      width: "550px",
+    },
+    createRoomDialogStyle: {
+      display: "flex",
+      flexDirection: "column",
+      opacity: "0.95",
+      borderRadius: "15px",
+      height: "200px",
+      width: "500px",
+    },
+    textFieldStyle: {
+      marginTop: "10px",
+    },
+    zipTextFieldStyle: {
+      marginTop: "10px",
+      width: "350px",
+    },
+    zipButtonStyle: {
+      marginTop: "15px",
+      marginLeft: "10px",
+    },
+    loginTextFieldStyle: {
+      margin: "10px",
+      backgroundColor: "white",
+      color: "white",
+    },
+    formContainer: {
+      backgroundColor: "#b5838d",
+      opacity: "0.95",
+      borderRadius: "15px",
+      display: "flex",
+      flexDirection: "column",
+      height: "350px",
+      width: "300px",
+    },
+    welcomeLabel: {
+      color: "white",
+      marginTop: "10%",
+      fontSize: "35px",
+      marginBottom: "20px",
+    },
+    gameInfoStyle: {
+      overflowY: "auto",
+      opacity: "0.92",
+      marginLeft: "32%",
+      marginRight: "25%",
+      marginTop: "50px",
+      marginBottom: "10px",
+      minWidth: "500px",
+    },
+  })
+);

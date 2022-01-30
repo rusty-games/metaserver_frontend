@@ -1,6 +1,5 @@
 import Button from "@material-ui/core/Button";
 import Toolbar from "@mui/material/Toolbar";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { SendGameButton } from "./sendGameButton";
@@ -8,31 +7,7 @@ import { postLogout } from "../Api/adminApi";
 import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import IconButton from "@material-ui/core/IconButton";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    toolbar: {
-      display: "flex",
-      justifyContent: "space-between",
-      backgroundColor: "#6d6875",
-      width: "inherit",
-    },
-    buttonStyle: {
-      backgroundColor: "#b5838d",
-      marginLeft: "10px",
-      marginRight: "20px",
-      color: "#FFFFFF",
-      fontWeight: "bold",
-    },
-    logoutButtonStyle: {
-      backgroundColor: "#823c4a",
-      marginLeft: "10px",
-      marginRight: "10px",
-      color: "#FFFFFF",
-      fontWeight: "bold",
-    },
-  })
-);
+import { useStyles } from "../Styles/style"
 
 export const adminLoggedIn = () => {
   return sessionStorage.length !== 0;
@@ -56,7 +31,7 @@ export function TopBar() {
           {adminLoggedIn() ? (
             <Button
               variant="contained"
-              className={classes.logoutButtonStyle}
+              className={classes.redButtonStyle}
               onClick={handleLogout}
             >
               Logout
@@ -64,7 +39,7 @@ export function TopBar() {
           ) : (
             <Button
               variant="contained"
-              className={classes.buttonStyle}
+              className={classes.defaultButtonStyle}
               component={Link}
               to="/login"
             >

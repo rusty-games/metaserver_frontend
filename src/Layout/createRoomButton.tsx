@@ -5,43 +5,9 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import TextField from "@material-ui/core/TextField";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import { postRoom } from "../Api/roomApi";
 import { useNavigate } from "react-router-dom";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    dialogStyle: {
-      display: "flex",
-      flexDirection: "column",
-      opacity: "0.95",
-      borderRadius: "15px",
-      height: "280px",
-      width: "500px",
-    },
-    textFieldStyle: {
-      marginTop: "10px",
-    },
-    zipTextFieldStyle: {
-      marginTop: "10px",
-      width: "388px",
-    },
-    buttonStyle: {
-      backgroundColor: "#b5838d",
-      width: "150px",
-      marginTop: "5px",
-      marginBottom: "5px",
-      marginLeft: "5px",
-      marginRight: "5px",
-      color: "#FFFFFF",
-      fontWeight: "bold",
-    },
-    zipButtonStyle: {
-      marginTop: "15px",
-      marginLeft: "10px",
-    },
-  })
-);
+import { useStyles } from "../Styles/style"
 
 export function RoomButton() {
   const classes = useStyles();
@@ -74,29 +40,29 @@ export function RoomButton() {
       <Button
         variant="contained"
         onClick={openCreateRoomDialog}
-        className={classes.buttonStyle}
+        className={classes.greenButtonStyle}
       >
         Create room
       </Button>
       <Dialog open={openDialog}>
         <DialogTitle>Create new room</DialogTitle>
-        <DialogContent className={classes.dialogStyle}>
+        <DialogContent className={classes.createRoomDialogStyle}>
+          <TextField
+            variant="filled"
+            label="Room name"
+            multiline
+            rows={2}
+            onChange={(event: any) =>
+                handleChangeName(event.target.value)
+            }
+            className={classes.textFieldStyle}
+          />
           <TextField
             id="create-room-max-players-number-input"
             variant="filled"
             label="Max number of players in room"
             type="number"
             onChange={(event: any) => handleChangeMaxPlayers(event.target.value)}
-            className={classes.textFieldStyle}
-          />
-          <TextField
-            variant="filled"
-            label="Room name"
-            multiline
-            rows={4}
-            onChange={(event: any) =>
-                handleChangeName(event.target.value)
-            }
             className={classes.textFieldStyle}
           />
         </DialogContent>

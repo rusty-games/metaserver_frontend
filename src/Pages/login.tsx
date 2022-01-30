@@ -4,46 +4,7 @@ import Button from "@material-ui/core/Button";
 import { useState } from "react";
 import Box from "@material-ui/core/Box";
 import { postLogin } from "../Api/adminApi";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    windowContainer: {
-      display: "flex",
-      flexDirection: "column",
-    },
-    formContainer: {
-      backgroundColor: "#b5838d",
-      opacity: "0.95",
-      borderRadius: "15px",
-      display: "flex",
-      flexDirection: "column",
-      height: "400px",
-      marginTop: "150px",
-      width: "300px",
-    },
-    welcomeLabel: {
-      color: "white",
-      marginTop: "10%",
-      fontSize: "35px",
-      marginBottom: "20px",
-    },
-    textFieldStyle: {
-      margin: "10px",
-      backgroundColor: "white",
-      color: "white",
-    },
-    gameInfoStyle: {
-      overflowY: "auto",
-      opacity: "0.92",
-      marginLeft: "32%",
-      marginRight: "25%",
-      marginTop: "100px",
-      marginBottom: "100px",
-      minWidth: "500px",
-    },
-  })
-);
+import { useStyles } from "../Styles/style"
 
 export const AdminLoginPage = () => {
   const classes = useStyles();
@@ -73,7 +34,7 @@ export const AdminLoginPage = () => {
           <TextField
             label="Login"
             variant="filled"
-            className={classes.textFieldStyle}
+            className={classes.loginTextFieldStyle}
             onChange={(event: any) => handleChangeLogin(event.target.value)}
             onKeyDown={onEnterDown}
           />
@@ -81,7 +42,7 @@ export const AdminLoginPage = () => {
             type="password"
             label="Password"
             variant="filled"
-            className={classes.textFieldStyle}
+            className={classes.loginTextFieldStyle}
             onChange={(event: any) => handleChangePassword(event.target.value)}
             onKeyDown={onEnterDown}
           />
