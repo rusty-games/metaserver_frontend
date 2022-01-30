@@ -74,7 +74,7 @@ export function Games() {
                 <ListItemText primary={game.description} style={{ overflowY: 'auto', height: '100px', width: '80%' }} />
               </div>
               {adminLoggedIn() ? (
-                <div>
+                <div style={{display: 'flex', flexDirection: 'column'}}> 
                   {!game.accepted ? (
                     <Button
                       className={classes.greenButtonStyle}

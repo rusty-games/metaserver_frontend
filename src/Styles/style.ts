@@ -93,9 +93,20 @@ export const useStyles = makeStyles((theme: Theme) =>
       marginLeft: "10px",
     },
     loginTextFieldStyle: {
-      margin: "10px",
+      marginTop: "5px",
+      marginBottom: "5px",
+      marginLeft: '5%',
+      marginRight: '5%',
       backgroundColor: "white",
       color: "white",
+      width: "90%",
+    },
+    loginButton: {
+      marginTop: "10px",
+      marginBottom: "5px",
+      marginLeft: '5%',
+      marginRight: '5%',
+      width: "90%",
     },
     formContainer: {
       backgroundColor: "#b5838d",
@@ -103,8 +114,6 @@ export const useStyles = makeStyles((theme: Theme) =>
       borderRadius: "15px",
       display: "flex",
       flexDirection: "column",
-      height: "350px",
-      width: "300px",
     },
     welcomeLabel: {
       color: "white",
@@ -115,11 +124,19 @@ export const useStyles = makeStyles((theme: Theme) =>
     gameInfoStyle: {
       overflowY: "auto",
       opacity: "0.92",
-      marginLeft: "32%",
-      marginRight: "25%",
+      marginLeft: "50%",
       marginTop: "50px",
       marginBottom: "10px",
       minWidth: "500px",
+    },
+    box: {
+      alignSelf: "center",
+      display: "flex",
+      flexDirection: "row",
+      height: "350px",
+      width: "300px",
+      maxHeight: "350px",
+      maxWidth: "300px",
     },
   })
 );

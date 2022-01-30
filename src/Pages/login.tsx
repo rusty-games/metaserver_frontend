@@ -28,9 +28,11 @@ export const AdminLoginPage = () => {
   };
   return (
     <div className={classes.gameInfoStyle}>
-      <Box display="flex" flexDirection="row" p={1} m={1} alignSelf="center">
+      <Box p={1} m={1} className={classes.box}>
         <Container fixed className={classes.formContainer}>
-          <div className={classes.welcomeLabel}>Log in as Administrator</div>
+          <div className={classes.welcomeLabel}>
+            Log in as Administrator
+          </div>
           <TextField
             label="Login"
             variant="filled"
@@ -48,6 +50,7 @@ export const AdminLoginPage = () => {
           />
           <Button
             variant="contained"
+            className={classes.loginButton}
             style={{ borderRadius: "15px" }}
             onClick={handleLogging}
           >
