@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import { Game } from "./gameApi";
 import placeholderLogo from "../Resources/placeholderLogo.png";
-import { BASE_URL } from "./urls";
+import { BASE_HTTP_URL } from "./urls";
 
 export interface IApiResponse<T> {
   isError: boolean;
@@ -62,7 +62,7 @@ export const getLogoUrl = (game: Game | undefined): string => {
   if (result.startsWith("http"))
     return result;
   else
-    return BASE_URL + result;
+    return BASE_HTTP_URL + result;
 }
 
 export const getRequestConfig = () => {
