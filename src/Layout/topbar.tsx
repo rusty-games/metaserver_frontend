@@ -1,5 +1,3 @@
-import React from "react";
-import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Toolbar from "@mui/material/Toolbar";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
@@ -17,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "space-between",
       backgroundColor: "#6d6875",
-      width: "98%",
+      width: "inherit",
     },
     buttonStyle: {
       backgroundColor: "#b5838d",
@@ -29,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
     logoutButtonStyle: {
       backgroundColor: "#823c4a",
       marginLeft: "10px",
-      marginRight: "20px",
+      marginRight: "10px",
       color: "#FFFFFF",
       fontWeight: "bold",
     },
@@ -46,13 +44,12 @@ export function TopBar() {
     postLogout();
   };
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+    <Box sx={{ flexGrow: 1, width: 'inherit'}}>
         <Toolbar className={classes.toolbar}>
           <IconButton edge="start" component={Link} to="/games">
             <HomeIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style = {{ color: 'white '}}>
             Rusty Games
           </Typography>
           <SendGameButton/>
@@ -75,7 +72,6 @@ export function TopBar() {
             </Button>
           )}
         </Toolbar>
-      </AppBar>
     </Box>
   );
 }

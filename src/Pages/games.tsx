@@ -24,9 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
       opacity: "0.92",
       marginLeft: "35%",
       marginRight: "5%",
-      marginTop: "100px",
-      marginBottom: "100px",
-      minWidth: "500px",
+      marginTop: "20px",
+      marginBottom: "0px",
     },
     listItemStyle: {
       height: "160px",

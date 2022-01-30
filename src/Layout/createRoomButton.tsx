@@ -29,8 +29,10 @@ const useStyles = makeStyles((theme: Theme) =>
     buttonStyle: {
       backgroundColor: "#b5838d",
       width: "150px",
-      marginTop: "10px",
-      marginBottom: "10px",
+      marginTop: "5px",
+      marginBottom: "5px",
+      marginLeft: "5px",
+      marginRight: "5px",
       color: "#FFFFFF",
       fontWeight: "bold",
     },
